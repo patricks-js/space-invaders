@@ -25,7 +25,7 @@ public class SpaceInvadersGame : Game
 
     protected override void Initialize()
     {
-        ScreenManager.Change(new GameScreen(_graphics));
+        ScreenManager.Change(new GameScreen());
         ScreenManager.Initialize(Content);
 
         base.Initialize();
