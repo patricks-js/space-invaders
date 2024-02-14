@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SpaceInvadersRetro.Screens;
+using SpaceInvadersRetro.Utils;
 
 namespace SpaceInvadersRetro;
 
@@ -14,10 +16,18 @@ public class SpaceInvadersGame : Game
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+
+        _graphics.PreferredBackBufferWidth = 720;
+        _graphics.PreferredBackBufferHeight = 896;
+
+        _graphics.ApplyChanges();
     }
 
     protected override void Initialize()
     {
+        ScreenManager.Change(new GameScreen(_graphics), Content);
+        ScreenManager.Initialize();
+
         base.Initialize();
     }
 
@@ -34,12 +44,20 @@ public class SpaceInvadersGame : Game
         )
             Exit();
 
+        ScreenManager.Update(gameTime);
+
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
+
+        _spriteBatch.Begin();
+
+        ScreenManager.Draw(_spriteBatch);
+
+        _spriteBatch.End();
 
         base.Draw(gameTime);
     }
