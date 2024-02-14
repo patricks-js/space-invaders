@@ -11,10 +11,7 @@ public abstract class SoundManager
 
     public static void CreateInstance(ContentManager content)
     {
-        if (_content != null)
-        {
-            _content = content;
-        }
+        _content ??= content;
     }
 
     public static void LoadBackgroundMusic(string songName)
