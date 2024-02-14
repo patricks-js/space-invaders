@@ -12,10 +12,10 @@ This game is made with C# programming language and MonoGame framework for game d
 
 ### Components
 
-- [ ] Entity interface
+- [x] Entity interface
 - [x] Spaceship
 - [ ] Enemies spaceships
-- [ ] Bullet
+- [x] Bullet
 - [ ] Bonus spaceship
 - [ ] Score
 - [ ] Hearts
