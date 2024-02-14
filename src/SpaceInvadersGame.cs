@@ -28,6 +28,8 @@ public class SpaceInvadersGame : Game
         ScreenManager.Change(new GameScreen());
         ScreenManager.Initialize(Content);
 
+        SoundManager.CreateInstance(Content);
+
         base.Initialize();
     }
 
