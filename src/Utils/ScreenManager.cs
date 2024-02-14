@@ -5,7 +5,7 @@ using SpaceInvadersRetro.Screens;
 
 namespace SpaceInvadersRetro.Utils;
 
-public abstract class ScreenManager
+public static class ScreenManager
 {
     private static IBaseScreen _currentScreen;
 

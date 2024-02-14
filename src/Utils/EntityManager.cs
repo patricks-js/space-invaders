@@ -6,7 +6,7 @@ using SpaceInvadersRetro.Interfaces;
 
 namespace SpaceInvadersRetro.Utils;
 
-public abstract class EntityManager
+public static class EntityManager
 {
     public static List<IEntity> Entities { get; set; } = new();
 
