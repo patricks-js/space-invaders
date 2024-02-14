@@ -9,15 +9,15 @@ public abstract class ScreenManager
 {
     private static IBaseScreen _currentScreen;
 
-    public static void Change(IBaseScreen screen, ContentManager content)
+    public static void Change(IBaseScreen screen)
     {
         _currentScreen = screen;
-        _currentScreen.LoadContent(content);
     }
 
-    public static void Initialize()
+    public static void Initialize(ContentManager content)
     {
         _currentScreen.Initialize();
+        _currentScreen.LoadContent(content);
     }
 
     public static void Update(GameTime gameTime)
