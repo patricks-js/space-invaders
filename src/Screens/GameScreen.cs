@@ -6,6 +6,13 @@ namespace SpaceInvadersRetro.Screens;
 
 public class GameScreen : IBaseScreen
 {
+    private readonly GraphicsDeviceManager _graphicsDevice;
+
+    public GameScreen(GraphicsDeviceManager graphics)
+    {
+        _graphicsDevice = graphics;
+    }
+
     public void Initialize() { }
 
     public void LoadContent(ContentManager content) { }
