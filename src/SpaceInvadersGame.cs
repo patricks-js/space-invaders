@@ -17,8 +17,8 @@ public class SpaceInvadersGame : Game
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
 
-        _graphics.PreferredBackBufferWidth = 720;
-        _graphics.PreferredBackBufferHeight = 896;
+        _graphics.PreferredBackBufferWidth = SCREEN.WIDTH;
+        _graphics.PreferredBackBufferHeight = SCREEN.HEIGHT;
 
         _graphics.ApplyChanges();
     }
