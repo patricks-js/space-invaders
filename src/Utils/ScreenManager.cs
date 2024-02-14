@@ -6,9 +6,9 @@ namespace SpaceInvadersRetro.Utils;
 
 public abstract class ScreenManager
 {
-    private static BaseScreen _currentScreen;
+    private static IBaseScreen _currentScreen;
 
-    public static void Change(BaseScreen screen)
+    public static void Change(IBaseScreen screen)
     {
         _currentScreen = screen;
         _currentScreen.LoadContent();
@@ -17,11 +17,6 @@ public abstract class ScreenManager
     public static void Initialize()
     {
         _currentScreen.Initialize();
-    }
-
-    public static void LoadContent()
-    {
-        _currentScreen.LoadContent();
     }
 
     public static void Update(GameTime gameTime)
