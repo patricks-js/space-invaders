@@ -8,12 +8,12 @@ using SpaceInvadersRetro.Utils;
 
 namespace SpaceInvadersRetro.Components;
 
-public class Spaceship : IEntity, IShootable
+public class Spaceship : EntityBase, IShootable
 {
     public Texture2D Texture { get; set; }
     public Vector2 Position { get; set; }
-    public Rectangle Bounds { get; set; }
-    private readonly List<Bullet> _bullets = new();
+    public override Rectangle Bounds { get; set; }
+    private Bullet _bullet;
     private Texture2D _bulletTexture;
     private const int _speed = 5;
 
@@ -22,28 +22,25 @@ public class Spaceship : IEntity, IShootable
         Position = initialPosition;
     }
 
-    public void LoadContent(ContentManager content)
+    public override void LoadContent(ContentManager content)
     {
         Texture = content.Load<Texture2D>("Sprites/Spaceship");
         _bulletTexture = content.Load<Texture2D>("Sprites/Bullet");
     }
 
-    public void Update(GameTime gameTime)
+    public override void Update(GameTime gameTime)
     {
         var keyboard = Keyboard.GetState();
 
-        if (keyboard.IsKeyDown(Keys.Space) && _bullets.Count == 0)
+        if (keyboard.IsKeyDown(Keys.Space) && _bullet == null)
         {
             Shoot();
         }
 
-        for (int i = _bullets.Count - 1; i >= 0; i--)
+        if (_bullet != null && _bullet.IsOffScreen())
         {
-            var bullet = _bullets[i];
-            bullet.GoUp(gameTime);
-
-            if (bullet.IsOffScreen())
-                _bullets.Remove(bullet);
+            BulletManager.RemoveBullet(_bullet);
+            _bullet = null;
         }
 
         Bounds = new((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
@@ -51,15 +48,12 @@ public class Spaceship : IEntity, IShootable
         Movement();
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public override void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(Texture, Position, Color.White);
-
-        foreach (var bullet in _bullets)
-        {
-            bullet.Draw(spriteBatch);
-        }
     }
+
+    public override void HandleCollision() { }
 
     public void Shoot()
     {
@@ -70,7 +64,7 @@ public class Spaceship : IEntity, IShootable
             Position.Y
         );
 
-        _bullets.Add(new Bullet(bulletPos, _bulletTexture));
+        _bullet = BulletManager.CreateBullet(bulletPos, _bulletTexture, -Vector2.UnitY);
     }
 
     private void Movement()

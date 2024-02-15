@@ -8,14 +8,20 @@ namespace SpaceInvadersRetro.Utils;
 
 public static class EntityManager
 {
-    private static readonly List<IEntity> _entities = new();
+    private static readonly List<EntityBase> _entities = new();
+    public static List<EntityBase> Entities => _entities;
 
-    public static void AddEntity(IEntity entity)
+    public static void AddEntity(EntityBase entity)
     {
         _entities.Add(entity);
     }
 
-    public static void RemoveEntity(IEntity entity)
+    public static EntityBase Search(int idx)
+    {
+        return _entities[idx];
+    }
+
+    public static void RemoveEntity(EntityBase entity)
     {
         _entities.Remove(entity);
     }
