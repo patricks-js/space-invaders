@@ -25,10 +25,10 @@ public class SpaceInvadersGame : Game
 
     protected override void Initialize()
     {
+        SoundManager.CreateInstance(Content);
+
         ScreenManager.Change(new GameScreen());
         ScreenManager.Initialize(Content);
-
-        SoundManager.CreateInstance(Content);
 
         base.Initialize();
     }

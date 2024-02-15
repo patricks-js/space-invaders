@@ -10,21 +10,19 @@ namespace SpaceInvadersRetro.Screens;
 public class GameScreen : IBaseScreen
 {
     private Texture2D _background;
-    private Song _music;
 
     public void Initialize()
     {
         LoadEntities();
+
+        SoundManager.LoadBackgroundMusic("spaceinvadersmusic");
+        SoundManager.PlayMusic(.7f, true);
     }
 
     public void LoadContent(ContentManager content)
     {
         _background = content.Load<Texture2D>("Images/Background");
-        _music = content.Load<Song>("Sounds/spaceinvadersmusic");
         EntityManager.LoadContent(content);
-
-        MediaPlayer.Volume -= .7f;
-        MediaPlayer.Play(_music);
     }
 
     public void Update(GameTime gameTime)
