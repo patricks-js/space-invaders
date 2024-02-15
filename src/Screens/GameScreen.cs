@@ -45,5 +45,6 @@ public class GameScreen : IBaseScreen
         EntityManager.AddEntity(new Spaceship(spaceshipPosition));
 
         // Aliens
+        EntityManager.AddEntity(new BonusShip());
     }
 }
