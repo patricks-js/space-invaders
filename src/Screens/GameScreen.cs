@@ -1,7 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
 using SpaceInvadersRetro.Components;
 using SpaceInvadersRetro.Utils;
 
@@ -15,8 +14,8 @@ public class GameScreen : IBaseScreen
     {
         LoadEntities();
 
-        SoundManager.LoadBackgroundMusic("spaceinvadersmusic");
-        SoundManager.PlayMusic(.7f, true);
+        SoundManager.LoadSong("spaceinvadersmusic");
+        SoundManager.PlaySong(.9f, true);
     }
 
     public void LoadContent(ContentManager content)
@@ -28,12 +27,14 @@ public class GameScreen : IBaseScreen
     public void Update(GameTime gameTime)
     {
         EntityManager.Update(gameTime);
+        BulletManager.Update(gameTime);
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(_background, new Vector2(0, 0), Color.White);
         EntityManager.Draw(spriteBatch);
+        BulletManager.Draw(spriteBatch);
     }
 
     private static void LoadEntities()
