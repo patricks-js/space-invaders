@@ -13,3 +13,14 @@ public readonly struct SCREEN
     public static readonly int WIDTH = 720;
     public static readonly int HEIGHT = 896;
 }
+
+public readonly struct SPRITE_SIZE
+{
+    public static readonly Dictionary<string, int> ALIENS =
+        new() { { "width", 45 }, { "height", 36 } };
+}
+
+public readonly struct SPRITE_FRAMES
+{
+    public static readonly int ALIENS = 2;
+}
