@@ -8,11 +8,21 @@ namespace SpaceInvadersRetro.Utils;
 
 public static class EntityManager
 {
-    public static List<IEntity> Entities { get; set; } = new();
+    private static readonly List<IEntity> _entities = new();
+
+    public static void AddEntity(IEntity entity)
+    {
+        _entities.Add(entity);
+    }
+
+    public static void RemoveEntity(IEntity entity)
+    {
+        _entities.Remove(entity);
+    }
 
     public static void LoadContent(ContentManager content)
     {
-        foreach (var entity in Entities)
+        foreach (var entity in _entities)
         {
             entity.LoadContent(content);
         }
@@ -20,7 +30,7 @@ public static class EntityManager
 
     public static void Update(GameTime gameTime)
     {
-        foreach (var entity in Entities)
+        foreach (var entity in _entities)
         {
             entity.Update(gameTime);
         }
@@ -28,7 +38,7 @@ public static class EntityManager
 
     public static void Draw(SpriteBatch spriteBatch)
     {
-        foreach (var entity in Entities)
+        foreach (var entity in _entities)
         {
             entity.Draw(spriteBatch);
         }
