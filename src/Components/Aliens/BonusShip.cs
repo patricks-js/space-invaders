@@ -44,6 +44,7 @@ public class BonusShip : AlienBase
     public override void LoadContent(ContentManager content)
     {
         Texture = content.Load<Texture2D>("Sprites/Aliens/Soraka");
+        _bounds = new((int)_position.X, (int)_position.Y, Texture.Width, Texture.Height);
     }
 
     public override void Update(GameTime gameTime)
@@ -70,4 +71,11 @@ public class BonusShip : AlienBase
 
     public override void Draw(SpriteBatch spriteBatch) =>
         spriteBatch.Draw(Texture, _position, Color.White);
+
+    public override void HandleCollision() { }
+
+    public override void Explosion()
+    {
+        throw new NotImplementedException();
+    }
 }
