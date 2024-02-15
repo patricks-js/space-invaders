@@ -14,29 +14,29 @@ public abstract class SoundManager
         _content ??= content;
     }
 
-    public static void LoadBackgroundMusic(string songName)
+    public static void LoadSong(string songName)
     {
         _backgroundMusic = _content.Load<Song>($"Sounds/{songName}");
     }
 
-    public static void PlayMusic(float volume, bool repeat)
+    public static void PlaySong(float volume, bool repeat)
     {
         MediaPlayer.IsRepeating = repeat;
         MediaPlayer.Volume -= volume;
         MediaPlayer.Play(_backgroundMusic);
     }
 
-    public static void PauseMusic()
+    public static void PauseSong()
     {
         MediaPlayer.Pause();
     }
 
-    public static void ResumeMusic()
+    public static void ResumeSong()
     {
         MediaPlayer.Resume();
     }
 
-    public static void StopMusic()
+    public static void StopSong()
     {
         MediaPlayer.Stop();
     }
