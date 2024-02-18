@@ -31,51 +31,50 @@ public class BonusShip : AlienBase
 
     public BonusShip()
     {
-        var x = SCREEN.WIDTH + MARGIN.X["min"];
-        var y = MARGIN.Y["top"] - 50;
-
-        _position = new(x, y);
-        _initialPosition = new(x, y);
-
         TimeToEnter = RandomManager.GetRandomTime();
         Points = RandomManager.GetRandomPoints();
+
+        _initialPosition = new(SCREEN.WIDTH + MARGIN.X["max"], MARGIN.Y["top"] - 50);
+        _position = _initialPosition;
     }
 
     public override void LoadContent(ContentManager content)
     {
         Texture = content.Load<Texture2D>("Sprites/Aliens/Soraka");
+
         _bounds = new((int)_position.X, (int)_position.Y, Texture.Width, Texture.Height);
     }
 
     public override void Update(GameTime gameTime)
     {
-        bool onScreen = _position.X >= -Texture.Width;
-
         if (Math.Ceiling(TimeToEnter) > 0)
         {
             TimeToEnter -= gameTime.ElapsedGameTime.TotalSeconds;
             return;
         }
 
-        if (!onScreen)
+        OnScreen = _position.X >= -Texture.Width;
+
+        if (!OnScreen || !IsAlive)
         {
             _position = _initialPosition;
+            _bounds.X = (int)_initialPosition.X;
+
+            IsAlive = true;
             Points = RandomManager.GetRandomPoints();
             TimeToEnter = RandomManager.GetRandomTime();
         }
 
         var toLeft = Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         _position.X -= toLeft;
-        _bounds.X -= (int)toLeft;
+        _bounds.X = (int)_position.X;
     }
 
     public override void Draw(SpriteBatch spriteBatch) =>
         spriteBatch.Draw(Texture, _position, Color.White);
 
-    public override void HandleCollision() { }
-
-    public override void Explosion()
+    public override void HandleCollision()
     {
-        throw new NotImplementedException();
+        IsAlive = false;
     }
 }
