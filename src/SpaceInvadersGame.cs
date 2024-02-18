@@ -16,15 +16,14 @@ public class SpaceInvadersGame : Game
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-
-        _graphics.PreferredBackBufferWidth = SCREEN.WIDTH;
-        _graphics.PreferredBackBufferHeight = SCREEN.HEIGHT;
-
-        _graphics.ApplyChanges();
     }
 
     protected override void Initialize()
     {
+        _graphics.PreferredBackBufferWidth = SCREEN.WIDTH;
+        _graphics.PreferredBackBufferHeight = SCREEN.HEIGHT;
+        _graphics.ApplyChanges();
+
         SoundManager.CreateInstance(Content);
 
         ScreenManager.Change(new GameScreen());
