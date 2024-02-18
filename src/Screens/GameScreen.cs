@@ -9,6 +9,7 @@ namespace SpaceInvadersRetro.Screens;
 public class GameScreen : IBaseScreen
 {
     private Texture2D _background;
+    private SpriteFont _font;
 
     public void Initialize()
     {
@@ -20,6 +21,7 @@ public class GameScreen : IBaseScreen
     public void LoadContent(ContentManager content)
     {
         _background = content.Load<Texture2D>("Images/Background");
+        _font = content.Load<SpriteFont>("Fonts/GameFont");
         EntityManager.LoadContent(content);
     }
 
@@ -31,7 +33,15 @@ public class GameScreen : IBaseScreen
 
     public void Draw(SpriteBatch spriteBatch)
     {
+        var score = ScoreManager.Score;
+
         spriteBatch.Draw(_background, new Vector2(0, 0), Color.White);
+        spriteBatch.DrawString(
+            _font,
+            $"Score: {score}",
+            new Vector2(MARGIN.X["min"], MARGIN.X["min"] + MARGIN.X["min"]),
+            Color.White
+        );
         EntityManager.Draw(spriteBatch);
         BulletManager.Draw(spriteBatch);
     }

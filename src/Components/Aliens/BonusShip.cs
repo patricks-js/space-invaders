@@ -76,5 +76,6 @@ public class BonusShip : AlienBase
     public override void HandleCollision()
     {
         IsAlive = false;
+        ScoreManager.Increment(Points);
     }
 }
