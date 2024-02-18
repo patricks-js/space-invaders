@@ -4,8 +4,9 @@ namespace SpaceInvadersRetro.Utils;
 
 public readonly struct MARGIN
 {
-    public static readonly Dictionary<string, int> X = new() { { "min", 20 }, { "max", 96 } };
+    public static readonly Dictionary<string, int> X = new() { { "min", 20 }, { "max", 82 } };
     public static readonly Dictionary<string, int> Y = new() { { "top", 200 }, { "bottom", 82 } };
+    public static readonly int BETWEEN = 12;
 }
 
 public readonly struct SCREEN
