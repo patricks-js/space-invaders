@@ -27,7 +27,7 @@ public class SpaceInvadersGame : Game
     {
         SoundManager.CreateInstance(Content);
 
-        ScreenManager.Change(new GameScreen());
+        ScreenManager.Change(new StartScreen());
         ScreenManager.Initialize(Content);
 
         base.Initialize();
