@@ -14,8 +14,7 @@ public class GameScreen : IBaseScreen
     {
         LoadEntities();
 
-        SoundManager.LoadSong("spaceinvadersmusic");
-        SoundManager.PlaySong(.9f, true);
+        SoundManager.StopSong();
     }
 
     public void LoadContent(ContentManager content)
