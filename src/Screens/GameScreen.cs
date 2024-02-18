@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceInvadersRetro.Components;
 using SpaceInvadersRetro.Components.Aliens;
+using SpaceInvadersRetro.Interfaces;
 using SpaceInvadersRetro.Utils;
 
 namespace SpaceInvadersRetro.Screens;
@@ -37,12 +38,14 @@ public class GameScreen : IBaseScreen
         var score = ScoreManager.Score;
 
         spriteBatch.Draw(_background, new Vector2(0, 0), Color.White);
+
         spriteBatch.DrawString(
             _font,
             $"Score: {score}",
             new Vector2(MARGIN.X["min"], MARGIN.X["min"] + MARGIN.X["min"]),
             Color.White
         );
+
         EntityManager.Draw(spriteBatch);
         BulletManager.Draw(spriteBatch);
     }
