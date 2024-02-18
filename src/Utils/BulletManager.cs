@@ -17,24 +17,11 @@ public static class BulletManager
         return bullet;
     }
 
-    public static void RemoveBullet(Bullet bullet)
-    {
-        _bullets.Remove(bullet);
-    }
+    public static void RemoveBullet(Bullet bullet) => _bullets.Remove(bullet);
 
-    public static void Update(GameTime gameTime)
-    {
-        foreach (var bullet in _bullets)
-        {
-            bullet?.Update(gameTime);
-        }
-    }
+    public static void Update(GameTime gameTime) =>
+        _bullets.ForEach(bullet => bullet?.Update(gameTime));
 
-    public static void Draw(SpriteBatch spriteBatch)
-    {
-        foreach (var bullet in _bullets)
-        {
-            bullet?.Draw(spriteBatch);
-        }
-    }
+    public static void Draw(SpriteBatch spriteBatch) =>
+        _bullets.ForEach(bullet => bullet?.Draw(spriteBatch));
 }
