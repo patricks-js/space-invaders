@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -45,6 +44,7 @@ public class Spaceship : EntityBase, IShootable
 
         Bounds = new((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
 
+        CheckCollision();
         Movement();
     }
 
@@ -54,6 +54,19 @@ public class Spaceship : EntityBase, IShootable
     }
 
     public override void HandleCollision() { }
+
+    public void CheckCollision()
+    {
+        foreach (var e in EntityManager.Entities)
+        {
+            if (_bullet != null && _bullet._bounds.Intersects(e.Bounds) && e != this)
+            {
+                e.HandleCollision();
+                BulletManager.RemoveBullet(_bullet);
+                _bullet = null;
+            }
+        }
+    }
 
     public void Shoot()
     {
