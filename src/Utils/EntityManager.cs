@@ -30,7 +30,7 @@ public static class EntityManager
     {
         foreach (var entity in _entities)
         {
-            entity.LoadContent(content);
+            entity?.LoadContent(content);
         }
     }
 
@@ -38,7 +38,7 @@ public static class EntityManager
     {
         foreach (var entity in _entities)
         {
-            entity.Update(gameTime);
+            entity?.Update(gameTime);
         }
     }
 
@@ -46,7 +46,7 @@ public static class EntityManager
     {
         foreach (var entity in _entities)
         {
-            entity.Draw(spriteBatch);
+            entity?.Draw(spriteBatch);
         }
     }
 }
