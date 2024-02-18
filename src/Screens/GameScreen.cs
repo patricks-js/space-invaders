@@ -43,6 +43,9 @@ public class GameScreen : IBaseScreen
         var spaceshipPosition = new Vector2(SCREEN.WIDTH / 2, SCREEN.HEIGHT - MARGIN.Y["bottom"]);
         EntityManager.AddEntity(new Spaceship(spaceshipPosition));
 
+        // Bullet
+        BulletManager.Bullets.ForEach(b => EntityManager.AddEntity(b));
+
         // Aliens
         EntityManager.AddEntity(new BonusShip());
     }
