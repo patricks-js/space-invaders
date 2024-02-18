@@ -8,7 +8,13 @@ public static class RandomManager
 
     public static double GetRandomTime()
     {
-        return random.Next(3, 6) * 10 / 2; // 15s, 20s or 25s
+        var rTime = random.Next(1, 4);
+
+        if (rTime == 1)
+            return 40;
+        if (rTime == 2)
+            return 90;
+        return 120;
     }
 
     public static int GetRandomPoints()
