@@ -9,8 +9,10 @@ namespace SpaceInvadersRetro.Screens;
 
 public class ScoreScreen : IBaseScreen
 {
-    private Texture2D _background, _logo;
+    private Texture2D _background,
+        _logo;
     private SpaceInvadersGame _game;
+
     public ScoreScreen(SpaceInvadersGame game)
     {
         _game = game;
@@ -19,7 +21,7 @@ public class ScoreScreen : IBaseScreen
     public void Initialize()
     {
         SoundManager.LoadSong("spaceinvadersmusic");
-        SoundManager.PlaySong(.9f, true);    
+        SoundManager.PlaySong(.9f, true);
     }
 
     public void LoadContent(ContentManager content)
@@ -32,10 +34,12 @@ public class ScoreScreen : IBaseScreen
     {
         var keyboard = Keyboard.GetState();
 
-        if(keyboard.IsKeyDown(Keys.Back)){
-         _game.ChangeScreen(new StartScreen(_game));
+        if (keyboard.IsKeyDown(Keys.Back))
+        {
+            _game.ChangeScreen(new StartScreen(_game));
         }
     }
+
     public void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(_background, new Vector2(0, 0), Color.White);
@@ -43,6 +47,6 @@ public class ScoreScreen : IBaseScreen
             _logo,
             new Vector2(SCREEN.WIDTH / 2 - _logo.Width / 2, MARGIN.Y["bottom"]),
             Color.White
-        );    
+        );
     }
 }

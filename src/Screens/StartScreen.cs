@@ -13,10 +13,12 @@ public class StartScreen : IBaseScreen
     private SpaceInvadersGame _game;
     private Texture2D _background;
     private Texture2D _logo;
-    private Texture2D _selectStart, _selectScore, _selectControls;
+    private Texture2D _selectStart,
+        _selectScore,
+        _selectControls;
     private bool IsKeyPress = false;
- 
-    private Texture2D [] Menu = new Texture2D [3];
+
+    private Texture2D[] Menu = new Texture2D[3];
 
     private int _choice = 0;
 
@@ -39,7 +41,6 @@ public class StartScreen : IBaseScreen
         Menu[0] = _selectStart = content.Load<Texture2D>("Images/SelectStart");
         Menu[1] = _selectScore = content.Load<Texture2D>("Images/SelectScore");
         Menu[2] = _selectControls = content.Load<Texture2D>("Images/SelectControls");
-
     }
 
     public void Update(GameTime gameTime)
@@ -48,21 +49,22 @@ public class StartScreen : IBaseScreen
 
         if (keyboard.IsKeyDown(Keys.Enter))
         {
-            switch(_choice){
+            switch (_choice)
+            {
                 case 0:
-                _game.ChangeScreen(new GameScreen());
-                break;
+                    _game.ChangeScreen(new GameScreen());
+                    break;
                 case 1:
-                _game.ChangeScreen(new ScoreScreen(_game));
-                break;
+                    _game.ChangeScreen(new ScoreScreen(_game));
+                    break;
                 case 2:
-                _game.ChangeScreen(new ControlScreen(_game));
-                break;
-                
+                    _game.ChangeScreen(new ControlScreen(_game));
+                    break;
             }
         }
 
-        if(keyboard.IsKeyDown(Keys.S)&& !IsKeyPress){
+        if (keyboard.IsKeyDown(Keys.S) && !IsKeyPress)
+        {
             IsKeyPress = true;
             Thread.Sleep(50);
             _choice++;
@@ -71,23 +73,24 @@ public class StartScreen : IBaseScreen
                 _choice = 0;
             }
         }
-        if(keyboard.IsKeyDown(Keys.W) && !IsKeyPress){
+        if (keyboard.IsKeyDown(Keys.W) && !IsKeyPress)
+        {
             IsKeyPress = true;
             Thread.Sleep(50);
             _choice--;
-            if(_choice < 0){
+            if (_choice < 0)
+            {
                 _choice = 2;
             }
         }
-        if(keyboard.IsKeyUp(Keys.S) ){
+        if (keyboard.IsKeyUp(Keys.S))
+        {
             IsKeyPress = false;
-     
         }
-        if(keyboard.IsKeyUp(Keys.W)){
+        if (keyboard.IsKeyUp(Keys.W))
+        {
             IsKeyPress = false;
-       
         }
-
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -100,6 +103,5 @@ public class StartScreen : IBaseScreen
         );
 
         spriteBatch.Draw(Menu[_choice], new Vector2(200, 350), Color.White);
-
     }
 }

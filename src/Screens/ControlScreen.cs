@@ -13,15 +13,17 @@ public class ControlScreen : IBaseScreen
     {
         _game = game;
     }
+
     private SpaceInvadersGame _game;
 
-    private Texture2D _background, _logo, _controlsImage;
-  
+    private Texture2D _background,
+        _logo,
+        _controlsImage;
 
     public void Initialize()
     {
         SoundManager.LoadSong("spaceinvadersmusic");
-        SoundManager.PlaySong(.9f, true);    
+        SoundManager.PlaySong(.9f, true);
     }
 
     public void LoadContent(ContentManager content)
@@ -29,7 +31,6 @@ public class ControlScreen : IBaseScreen
         _background = content.Load<Texture2D>("Images/Background");
         _logo = content.Load<Texture2D>("Images/Logo");
         _controlsImage = content.Load<Texture2D>("Images/ControlsImage");
-
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -47,8 +48,9 @@ public class ControlScreen : IBaseScreen
     {
         var keyboard = Keyboard.GetState();
 
-        if(keyboard.IsKeyDown(Keys.Back)){
-         _game.ChangeScreen(new StartScreen(_game));
+        if (keyboard.IsKeyDown(Keys.Back))
+        {
+            _game.ChangeScreen(new StartScreen(_game));
         }
     }
 }

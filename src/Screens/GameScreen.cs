@@ -6,7 +6,6 @@ using SpaceInvadersRetro.Components.Aliens;
 using SpaceInvadersRetro.Interfaces;
 using SpaceInvadersRetro.Utils;
 
-
 namespace SpaceInvadersRetro.Screens;
 
 public class GameScreen : IBaseScreen
@@ -64,5 +63,4 @@ public class GameScreen : IBaseScreen
         // Aliens
         EntityManager.AddEntity(new BonusShip());
     }
-    
 }
