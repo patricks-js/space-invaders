@@ -1,10 +1,8 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceInvadersRetro.Interfaces;
-using SpaceInvadersRetro.Utils;
 
-namespace SpaceInvadersRetro.Components;
+namespace SpaceInvadersRetro.Components.Aliens;
 
 public abstract class AlienBase : EntityBase
 {
