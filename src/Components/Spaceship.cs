@@ -77,7 +77,7 @@ public class Spaceship : EntityBase, IShootable
             Position.Y
         );
 
-        _bullet = BulletManager.CreateBullet(bulletPos, _bulletTexture, -Vector2.UnitY);
+        _bullet = BulletManager.CreateBullet(bulletPos, _bulletTexture, -Vector2.UnitY, 500f);
     }
 
     private void Movement()

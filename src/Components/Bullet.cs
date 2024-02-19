@@ -19,12 +19,13 @@ public class Bullet : EntityBase
         set => _bounds = value;
     }
 
-    public Bullet(Vector2 initialPosition, Texture2D texture, Vector2 direction)
+    public Bullet(Vector2 initialPosition, Texture2D texture, Vector2 direction, float speed)
     {
         Texture = texture;
         _position = initialPosition;
         _direction = direction;
         _bounds = new((int)_position.X, (int)_position.Y, Texture.Width, Texture.Height);
+        Speed = speed;
     }
 
     public override void Update(GameTime gameTime)

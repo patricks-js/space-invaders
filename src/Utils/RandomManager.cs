@@ -6,6 +6,8 @@ public static class RandomManager
 {
     private static readonly Random random = new();
 
+    public static Random Random => random;
+
     public static double GetRandomTime()
     {
         var rTime = random.Next(1, 4);

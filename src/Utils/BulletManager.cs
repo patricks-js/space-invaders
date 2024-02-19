@@ -10,9 +10,14 @@ public static class BulletManager
     private static readonly List<Bullet> _bullets = new();
     public static List<Bullet> Bullets => _bullets;
 
-    public static Bullet CreateBullet(Vector2 position, Texture2D texture, Vector2 direction)
+    public static Bullet CreateBullet(
+        Vector2 position,
+        Texture2D texture,
+        Vector2 direction,
+        float speed
+    )
     {
-        var bullet = new Bullet(position, texture, direction);
+        var bullet = new Bullet(position, texture, direction, speed);
         _bullets.Add(bullet);
         return bullet;
     }
