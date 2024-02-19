@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SpaceInvadersRetro.Interfaces;
 using SpaceInvadersRetro.Screens;
 using SpaceInvadersRetro.Utils;
 
@@ -8,8 +9,9 @@ namespace SpaceInvadersRetro;
 
 public class SpaceInvadersGame : Game
 {
-    private GraphicsDeviceManager _graphics;
+    private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private IBaseScreen _currentScreen;
 
     public SpaceInvadersGame()
     {
@@ -26,8 +28,7 @@ public class SpaceInvadersGame : Game
 
         SoundManager.CreateInstance(Content);
 
-        ScreenManager.Change(new StartScreen());
-        ScreenManager.Initialize(Content);
+        _currentScreen = new StartScreen(this);
 
         base.Initialize();
     }
@@ -35,6 +36,7 @@ public class SpaceInvadersGame : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+        _currentScreen.LoadContent(Content);
     }
 
     protected override void Update(GameTime gameTime)
@@ -45,7 +47,7 @@ public class SpaceInvadersGame : Game
         )
             Exit();
 
-        ScreenManager.Update(gameTime);
+        _currentScreen.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -56,10 +58,18 @@ public class SpaceInvadersGame : Game
 
         _spriteBatch.Begin();
 
-        ScreenManager.Draw(_spriteBatch);
+        _currentScreen.Draw(_spriteBatch);
 
         _spriteBatch.End();
 
         base.Draw(gameTime);
+    }
+
+    public void ChangeScreen(IBaseScreen @base)
+    {
+        @base.Initialize();
+        @base.LoadContent(Content);
+
+        _currentScreen = @base;
     }
 }
