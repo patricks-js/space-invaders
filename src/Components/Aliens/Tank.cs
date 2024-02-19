@@ -12,7 +12,7 @@ public class Tank : AlienBase
 
     public override Texture2D Texture { get; set; }
     public override bool IsAlive { get; set; } = true;
-    public override int Points { get; set; } = 10;
+    public override int Points { get; set; } = 5;
     public override Vector2 Position
     {
         get => _position;
