@@ -6,6 +6,7 @@ using SpaceInvadersRetro.Components.Aliens;
 using SpaceInvadersRetro.Interfaces;
 using SpaceInvadersRetro.Utils;
 
+
 namespace SpaceInvadersRetro.Screens;
 
 public class GameScreen : IBaseScreen
@@ -23,7 +24,7 @@ public class GameScreen : IBaseScreen
     public void LoadContent(ContentManager content)
     {
         _background = content.Load<Texture2D>("Images/Background");
-        _font = content.Load<SpriteFont>("Fonts/GameFont");
+        //_font = content.Load<SpriteFont>("Fonts/GameFont");
         EntityManager.LoadContent(content);
     }
 
@@ -38,13 +39,14 @@ public class GameScreen : IBaseScreen
         var score = ScoreManager.Score;
 
         spriteBatch.Draw(_background, new Vector2(0, 0), Color.White);
-
+        /*
         spriteBatch.DrawString(
             _font,
             $"Score: {score}",
             new Vector2(MARGIN.X["min"], MARGIN.X["min"] + MARGIN.X["min"]),
             Color.White
         );
+        */
 
         EntityManager.Draw(spriteBatch);
         BulletManager.Draw(spriteBatch);
@@ -62,4 +64,5 @@ public class GameScreen : IBaseScreen
         // Aliens
         EntityManager.AddEntity(new BonusShip());
     }
+    
 }
