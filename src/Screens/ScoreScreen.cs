@@ -11,6 +11,7 @@ public class ScoreScreen : IBaseScreen
 {
     private Texture2D _background,
         _logo;
+    private Texture2D _backspace;
     private SpaceInvadersGame _game;
 
     public ScoreScreen(SpaceInvadersGame game)
@@ -28,6 +29,7 @@ public class ScoreScreen : IBaseScreen
     {
         _background = content.Load<Texture2D>("Images/Background");
         _logo = content.Load<Texture2D>("Images/Logo");
+        _backspace = content.Load<Texture2D>("Images/Backspace");
     }
 
     public void Update(GameTime gameTime)
@@ -48,5 +50,6 @@ public class ScoreScreen : IBaseScreen
             new Vector2(SCREEN.WIDTH / 2 - _logo.Width / 2, MARGIN.Y["bottom"]),
             Color.White
         );
+        spriteBatch.Draw(_backspace, new Vector2(50, 758), Color.White);
     }
 }

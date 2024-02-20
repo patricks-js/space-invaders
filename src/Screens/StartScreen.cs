@@ -13,6 +13,8 @@ public class StartScreen : IBaseScreen
     private SpaceInvadersGame _game;
     private Texture2D _background;
     private Texture2D _logo;
+    private Texture2D _select, _enter;
+
     private Texture2D _selectStart,
         _selectScore,
         _selectControls;
@@ -37,6 +39,8 @@ public class StartScreen : IBaseScreen
     {
         _background = content.Load<Texture2D>("Images/Background");
         _logo = content.Load<Texture2D>("Images/Logo");
+        _select = content.Load<Texture2D>("Images/Select");
+        _enter = content.Load<Texture2D>("Images/Enter");
 
         Menu[0] = _selectStart = content.Load<Texture2D>("Images/SelectStart");
         Menu[1] = _selectScore = content.Load<Texture2D>("Images/SelectScore");
@@ -103,5 +107,8 @@ public class StartScreen : IBaseScreen
         );
 
         spriteBatch.Draw(Menu[_choice], new Vector2(200, 350), Color.White);
+
+        spriteBatch.Draw(_select, new Vector2(50, 720), Color.White);
+        spriteBatch.Draw(_enter, new Vector2(550, 758), Color.White);
     }
 }
