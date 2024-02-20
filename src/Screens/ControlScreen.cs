@@ -19,6 +19,7 @@ public class ControlScreen : IBaseScreen
     private Texture2D _background,
         _logo,
         _controlsImage;
+    private Texture2D _backspace;
 
     public void Initialize()
     {
@@ -31,6 +32,7 @@ public class ControlScreen : IBaseScreen
         _background = content.Load<Texture2D>("Images/Background");
         _logo = content.Load<Texture2D>("Images/Logo");
         _controlsImage = content.Load<Texture2D>("Images/ControlsImage");
+        _backspace = content.Load<Texture2D>("Images/Backspace");
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -42,6 +44,7 @@ public class ControlScreen : IBaseScreen
             Color.White
         );
         spriteBatch.Draw(_controlsImage, new Vector2(100, 350), Color.White);
+        spriteBatch.Draw(_backspace, new Vector2(50, 758), Color.White);
     }
 
     public void Update(GameTime gameTime)
