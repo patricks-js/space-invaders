@@ -91,7 +91,7 @@ public class Carry : AlienBase, IShootable
     public void Shoot()
     {
         var bulletPos = new Vector2(
-            Position.X + (Texture.Width - _bulletTexture.Width) / 2,
+            Position.X + (_sprites[_spriteIdx].Width - _bulletTexture.Width) / 2,
             Position.Y
         );
 
@@ -102,7 +102,7 @@ public class Carry : AlienBase, IShootable
     {
         foreach (var e in EntityManager.Entities)
         {
-            if (_bullet != null && _bullet._bounds.Intersects(e.Bounds) && e != this)
+            if (_bullet != null && _bullet._bounds.Intersects(e.Bounds) && e is not AlienBase)
             {
                 e.HandleCollision();
                 BulletManager.RemoveBullet(_bullet);
