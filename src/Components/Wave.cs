@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 using SpaceInvadersRetro.Components.Aliens;
 using SpaceInvadersRetro.Utils;
 
@@ -24,15 +23,22 @@ public static class Wave
         var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
         var toLeft = Vector2.UnitX * deltaTime * 20;
         var toRight = -Vector2.UnitX * deltaTime * 20;
+        var toDown = new Vector2(0, 20);
 
         foreach (var alien in Aliens)
         {
-            if (_toLeft) alien.Position += toLeft;
-            else alien.Position += toRight;
+            if (_toLeft)
+                alien.Position += toLeft;
+            else
+                alien.Position += toRight;
 
-            if (alien.Position.X >= SCREEN.WIDTH - MARGIN.X["min"] - SPRITE_SIZE.ALIENS["width"] || alien.Position.X <= MARGIN.X["min"])
+            var inLeftSide = alien.Position.X >= SCREEN.WIDTH - MARGIN.X["min"] - SPRITE_SIZE.ALIENS["width"];
+            var inRightSide = alien.Position.X <= MARGIN.X["min"];
+
+            if (inLeftSide || inRightSide)
             {
                 _toLeft = !_toLeft;
+                Aliens.ForEach(alienToDown => alienToDown.Position += toDown);
             }
         }
     }
