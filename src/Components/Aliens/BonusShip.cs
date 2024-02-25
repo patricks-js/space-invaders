@@ -87,5 +87,6 @@ public class BonusShip : AlienBase
     {
         IsAlive = false;
         ScoreManager.Increment(_points);
+        SoundManager.PlaySoundEffect("invaderkilled");
     }
 }

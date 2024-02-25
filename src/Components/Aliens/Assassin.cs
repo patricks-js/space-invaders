@@ -27,7 +27,7 @@ public class Assassin : AlienBase
     public Assassin(Vector2 position)
     {
         _position = position;
-        _sprites = new Rectangle[SPRITE_FRAMES.ALIENS];
+        Sprites = new Rectangle[SPRITE_FRAMES.ALIENS];
     }
 
     public override void LoadContent(ContentManager content)
@@ -37,18 +37,18 @@ public class Assassin : AlienBase
         var w = SPRITE_SIZE.ALIENS["width"];
         var h = SPRITE_SIZE.ALIENS["height"];
 
-        _sprites[0] = new(0, 0, w, h);
-        _sprites[1] = new(w, 0, w, h);
+        Sprites[0] = new(0, 0, w, h);
+        Sprites[1] = new(w, 0, w, h);
     }
 
     public override void Update(GameTime gameTime)
     {
-        _elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        ElapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         var x = (int)_position.X;
         var y = (int)_position.Y;
-        var w = _sprites[_spriteIdx].Width;
-        var h = _sprites[_spriteIdx].Height;
+        var w = Sprites[SpriteIdx].Width;
+        var h = Sprites[SpriteIdx].Height;
 
         Animation();
 
@@ -57,13 +57,14 @@ public class Assassin : AlienBase
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(Texture, _position, _sprites[_spriteIdx], Color.White);
+        spriteBatch.Draw(Texture, _position, Sprites[SpriteIdx], Color.White);
     }
 
     public override void HandleCollision()
     {
         IsAlive = false;
         ScoreManager.Increment(Points);
+        SoundManager.PlaySoundEffect("invaderkilled");
         EntityManager.RemoveEntity(this);
     }
 }
