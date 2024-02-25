@@ -14,7 +14,7 @@ public class Spaceship : EntityBase, IShootable
     public override Rectangle Bounds { get; set; }
     private Bullet _bullet;
     private Texture2D _bulletTexture;
-    private const int _speed = 5;
+    private const int Speed = 5;
 
     public Spaceship(Vector2 initialPosition)
     {
@@ -91,7 +91,7 @@ public class Spaceship : EntityBase, IShootable
         {
             if (Position.X >= Margin.X["max"])
             {
-                Position = new(Position.X - _speed, Position.Y);
+                Position = new(Position.X - Speed, Position.Y);
             }
         }
 
@@ -99,7 +99,7 @@ public class Spaceship : EntityBase, IShootable
         {
             if (Position.X < Screen.Width - Margin.X["max"] - Texture.Width)
             {
-                Position = new(Position.X + _speed, Position.Y);
+                Position = new(Position.X + Speed, Position.Y);
             }
         }
     }
