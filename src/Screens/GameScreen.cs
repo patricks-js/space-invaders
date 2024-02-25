@@ -68,11 +68,11 @@ public class GameScreen : IBaseScreen
         BulletManager.Draw(spriteBatch);
     }
 
-    private static void LoadEntities()
+    private void LoadEntities()
     {
         // Spaceship
         var spaceshipPosition = new Vector2(Screen.Width / 2, Screen.Height - Margin.Y["bottom"]);
-        EntityManager.AddEntity(new Spaceship(spaceshipPosition));
+        EntityManager.AddEntity(new Spaceship(spaceshipPosition, _game));
 
         // Bullet
         BulletManager.Bullets.ForEach(EntityManager.AddEntity);
