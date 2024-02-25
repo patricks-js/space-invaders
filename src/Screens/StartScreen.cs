@@ -56,7 +56,7 @@ public class StartScreen : IBaseScreen
             switch (_choice)
             {
                 case 0:
-                    _game.ChangeScreen(new GameScreen());
+                    _game.ChangeScreen(new GameScreen(_game));
                     break;
                 case 1:
                     _game.ChangeScreen(new ScoreScreen(_game));

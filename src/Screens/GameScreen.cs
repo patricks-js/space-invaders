@@ -1,3 +1,4 @@
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,8 +11,14 @@ namespace SpaceInvadersRetro.Screens;
 
 public class GameScreen : IBaseScreen
 {
+    private SpaceInvadersGame _game;
     private Texture2D _background;
-    private SpriteFont _font;
+    // private SpriteFont _font;
+
+    public GameScreen(SpaceInvadersGame game)
+    {
+        _game = game;
+    }
 
     public void Initialize()
     {
@@ -32,6 +39,14 @@ public class GameScreen : IBaseScreen
     {
         EntityManager.Update(gameTime);
         BulletManager.Update(gameTime);
+
+        if (Wave.Aliens.Count <= 0)
+        {
+            Wave.LoadAliens(40);
+            Wave.LoadAliensContent(_game.Content);
+            Thread.Sleep(100);
+            Wave.Aliens.ForEach(EntityManager.AddEntity);
+        }
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -72,9 +87,8 @@ public class GameScreen : IBaseScreen
             EntityManager.AddEntity(new Barricade(new Vector2(x, y)));
         }
 
-        Wave.LoadAliens();
-        var _wave = Wave.Aliens;
-        _wave.ForEach(a => EntityManager.AddEntity(a));
-
+        Wave.LoadAliens(0);
+        var wave = Wave.Aliens;
+        wave.ForEach(EntityManager.AddEntity);
     }
 }
