@@ -19,6 +19,8 @@ public readonly struct SPRITE_SIZE
 {
     public static readonly Dictionary<string, int> ALIENS =
         new() { { "width", 45 }, { "height", 36 } };
+    public static readonly Dictionary<string, int> BARRICADE =
+        new() { { "width", 80 }, { "height", 115 } };
 }
 
 public readonly struct SPRITE_FRAMES
