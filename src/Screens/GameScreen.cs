@@ -39,7 +39,7 @@ public class GameScreen : IBaseScreen
     {
         EntityManager.Update(gameTime);
         BulletManager.Update(gameTime);
-        Wave.Update(gameTime);
+        Wave.Update(gameTime, _game);
 
         if (Wave.Aliens.Count <= 0)
         {
@@ -75,7 +75,7 @@ public class GameScreen : IBaseScreen
         EntityManager.AddEntity(new Spaceship(spaceshipPosition));
 
         // Bullet
-        BulletManager.Bullets.ForEach(b => EntityManager.AddEntity(b));
+        BulletManager.Bullets.ForEach(EntityManager.AddEntity);
 
         // Aliens
         EntityManager.AddEntity(new BonusShip());
