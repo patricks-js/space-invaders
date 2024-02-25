@@ -73,7 +73,7 @@ public class Carry : AlienBase, IShootable
             _bullet = null;
         }
 
-        CheckCollision();
+        CheckBulletCollision();
     }
 
     public override void Draw(SpriteBatch spriteBatch)
@@ -99,7 +99,7 @@ public class Carry : AlienBase, IShootable
         _bullet = BulletManager.CreateBullet(bulletPos, _bulletTexture, Vector2.UnitY, 350f);
     }
 
-    public void CheckCollision()
+    public void CheckBulletCollision()
     {
         foreach (var e in EntityManager.Entities)
         {
