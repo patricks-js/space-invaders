@@ -47,7 +47,7 @@ public class ScoreScreen : IBaseScreen
         spriteBatch.Draw(_background, new Vector2(0, 0), Color.White);
         spriteBatch.Draw(
             _logo,
-            new Vector2(SCREEN.WIDTH / 2 - _logo.Width / 2, MARGIN.Y["bottom"]),
+            new Vector2(Screen.Width / 2 - _logo.Width / 2, Margin.Y["bottom"]),
             Color.White
         );
         spriteBatch.Draw(_backspace, new Vector2(50, 758), Color.White);

@@ -40,7 +40,7 @@ public class Bullet : EntityBase
     public override void Draw(SpriteBatch spriteBatch) =>
         spriteBatch.Draw(Texture, _position, Color.White);
 
-    public bool IsOffScreen() => _position.Y + _bounds.Height < 0 || _position.Y >= SCREEN.HEIGHT;
+    public bool IsOffScreen() => _position.Y + _bounds.Height < 0 || _position.Y >= Screen.Height;
 
     public override void LoadContent(ContentManager content) { }
 

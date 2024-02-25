@@ -32,8 +32,8 @@ public static class Wave
             else
                 alien.Position += toRight;
 
-            var inLeftSide = alien.Position.X >= SCREEN.WIDTH - MARGIN.X["min"] - SPRITE_SIZE.ALIENS["width"];
-            var inRightSide = alien.Position.X <= MARGIN.X["min"];
+            var inLeftSide = alien.Position.X >= Screen.Width - Margin.X["min"] - SpriteSize.Aliens["width"];
+            var inRightSide = alien.Position.X <= Margin.X["min"];
 
             if (inLeftSide || inRightSide)
             {
@@ -49,11 +49,11 @@ public static class Wave
 
         for (int row = 0; row < 5; row++)
         {
-            var y = MARGIN.Y["top"] + _gap + (SPRITE_SIZE.ALIENS["height"] + MARGIN.BETWEEN * 2) * row;
+            var y = Margin.Y["top"] + _gap + (SpriteSize.Aliens["height"] + Margin.Between * 2) * row;
 
             for (int col = 0; col < 10; col++)
             {
-                var x = MARGIN.X["max"] + (MARGIN.BETWEEN + SPRITE_SIZE.ALIENS["width"]) * col;
+                var x = Margin.X["max"] + (Margin.Between + SpriteSize.Aliens["width"]) * col;
                 MakeLines(row, x, y);
             }
         }

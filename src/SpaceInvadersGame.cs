@@ -22,8 +22,8 @@ public class SpaceInvadersGame : Game
 
     protected override void Initialize()
     {
-        _graphics.PreferredBackBufferWidth = SCREEN.WIDTH;
-        _graphics.PreferredBackBufferHeight = SCREEN.HEIGHT;
+        _graphics.PreferredBackBufferWidth = Screen.Width;
+        _graphics.PreferredBackBufferHeight = Screen.Height;
         _graphics.ApplyChanges();
 
         SoundManager.CreateInstance(Content);

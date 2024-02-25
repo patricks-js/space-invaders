@@ -71,7 +71,7 @@ public class GameScreen : IBaseScreen
     private static void LoadEntities()
     {
         // Spaceship
-        var spaceshipPosition = new Vector2(SCREEN.WIDTH / 2, SCREEN.HEIGHT - MARGIN.Y["bottom"]);
+        var spaceshipPosition = new Vector2(Screen.Width / 2, Screen.Height - Margin.Y["bottom"]);
         EntityManager.AddEntity(new Spaceship(spaceshipPosition));
 
         // Bullet
@@ -83,8 +83,8 @@ public class GameScreen : IBaseScreen
         // Barricade
         for (int i = 0; i < 4; i++)
         {
-            var y = SCREEN.HEIGHT - MARGIN.Y["top"];
-            var x = MARGIN.X["max"] + MARGIN.X["min"] + 10 + (SPRITE_SIZE.BARRICADE["width"] + MARGIN.BETWEEN * 5) * i;
+            var y = Screen.Height - Margin.Y["top"];
+            var x = Margin.X["max"] + Margin.X["min"] + 10 + (SpriteSize.Barricade["width"] + Margin.Between * 5) * i;
             EntityManager.AddEntity(new Barricade(new Vector2(x, y)));
         }
 

@@ -89,7 +89,7 @@ public class Spaceship : EntityBase, IShootable
 
         if (keyboard.IsKeyDown(Keys.A) || keyboard.IsKeyDown(Keys.Left))
         {
-            if (Position.X >= MARGIN.X["max"])
+            if (Position.X >= Margin.X["max"])
             {
                 Position = new(Position.X - _speed, Position.Y);
             }
@@ -97,7 +97,7 @@ public class Spaceship : EntityBase, IShootable
 
         if (keyboard.IsKeyDown(Keys.D) || keyboard.IsKeyDown(Keys.Right))
         {
-            if (Position.X < SCREEN.WIDTH - MARGIN.X["max"] - Texture.Width)
+            if (Position.X < Screen.Width - Margin.X["max"] - Texture.Width)
             {
                 Position = new(Position.X + _speed, Position.Y);
             }

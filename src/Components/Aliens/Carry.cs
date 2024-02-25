@@ -31,7 +31,7 @@ public class Carry : AlienBase, IShootable
     public Carry(Vector2 position)
     {
         _position = position;
-        Sprites = new Rectangle[SPRITE_FRAMES.ALIENS];
+        Sprites = new Rectangle[SpriteFrames.Aliens];
         _timeToShot = RandomManager.Random.Next(1, 10) * 10 / 2;
     }
 
@@ -40,8 +40,8 @@ public class Carry : AlienBase, IShootable
         Texture = content.Load<Texture2D>("Sprites/Aliens/Carry");
         _bulletTexture = content.Load<Texture2D>("Sprites/AlienBullet");
 
-        var w = SPRITE_SIZE.ALIENS["width"];
-        var h = SPRITE_SIZE.ALIENS["height"];
+        var w = SpriteSize.Aliens["width"];
+        var h = SpriteSize.Aliens["height"];
 
         Sprites[0] = new(0, 0, w, h);
         Sprites[1] = new(w, 0, w, h);

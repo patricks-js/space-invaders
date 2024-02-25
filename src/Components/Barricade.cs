@@ -24,8 +24,8 @@ public class Barricade : EntityBase
 
         _isDead = _lifes == 0;
 
-        var w = SPRITE_SIZE.BARRICADE["width"];
-        var h = SPRITE_SIZE.BARRICADE["height"];
+        var w = SpriteSize.Barricade["width"];
+        var h = SpriteSize.Barricade["height"];
 
         _sprites[4] = new Rectangle(0, h - 115, w, 39);
         _sprites[3] = new Rectangle(0, h - 76, w, 38);

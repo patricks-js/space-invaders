@@ -44,7 +44,7 @@ public class BonusShip : AlienBase
         TimeToEnter = RandomManager.GetRandomTime();
         Points = RandomManager.GetRandomPoints();
 
-        _initialPosition = new(SCREEN.WIDTH + MARGIN.X["max"], MARGIN.Y["top"] - 50);
+        _initialPosition = new(Screen.Width + Margin.X["max"], Margin.Y["top"] - 50);
         _position = _initialPosition;
     }
 

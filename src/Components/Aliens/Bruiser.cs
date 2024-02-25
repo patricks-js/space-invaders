@@ -27,15 +27,15 @@ public class Bruiser : AlienBase
     public Bruiser(Vector2 position)
     {
         _position = position;
-        Sprites = new Rectangle[SPRITE_FRAMES.ALIENS];
+        Sprites = new Rectangle[SpriteFrames.Aliens];
     }
 
     public override void LoadContent(ContentManager content)
     {
         Texture = content.Load<Texture2D>("Sprites/Aliens/Bruiser");
 
-        var w = SPRITE_SIZE.ALIENS["width"];
-        var h = SPRITE_SIZE.ALIENS["height"];
+        var w = SpriteSize.Aliens["width"];
+        var h = SpriteSize.Aliens["height"];
 
         Sprites[0] = new(0, 0, w, h);
         Sprites[1] = new(w, 0, w, h);
