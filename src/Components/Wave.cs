@@ -8,10 +8,11 @@ namespace SpaceInvadersRetro.Components;
 public static class Wave
 {
     private static List<AlienBase> _aliens = new();
+    public static int Gap { get; set; }
     public static List<AlienBase> Aliens
     {
         get => _aliens;
-        set => _aliens = value;
+        private set => _aliens = value;
     }
 
     public static void LoadAliensContent(ContentManager content)
@@ -19,11 +20,13 @@ public static class Wave
         _aliens.ForEach(a => a.LoadContent(content));
     }
 
-    public static void LoadAliens()
+    public static void LoadAliens(int plusGap)
     {
+        Gap += plusGap;
+
         for (int row = 0; row < 5; row++)
         {
-            var y = MARGIN.Y["top"] + (SPRITE_SIZE.ALIENS["height"] + MARGIN.BETWEEN * 2) * row;
+            var y = MARGIN.Y["top"] + Gap + (SPRITE_SIZE.ALIENS["height"] + MARGIN.BETWEEN * 2) * row;
 
             for (int col = 0; col < 10; col++)
             {
