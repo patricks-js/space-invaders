@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using SpaceInvadersRetro.Components.Aliens;
 using SpaceInvadersRetro.Utils;
 
@@ -9,11 +11,30 @@ namespace SpaceInvadersRetro.Components;
 public static class Wave
 {
     private static int _gap;
+    private static bool _toLeft = true;
     public static List<AlienBase> Aliens { get; private set; } = new();
 
     public static void LoadAliensContent(ContentManager content)
     {
         Aliens.ForEach(a => a.LoadContent(content));
+    }
+
+    public static void Update(GameTime gameTime)
+    {
+        var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        var toLeft = Vector2.UnitX * deltaTime * 20;
+        var toRight = -Vector2.UnitX * deltaTime * 20;
+
+        foreach (var alien in Aliens)
+        {
+            if (_toLeft) alien.Position += toLeft;
+            else alien.Position += toRight;
+
+            if (alien.Position.X >= SCREEN.WIDTH - MARGIN.X["min"] - SPRITE_SIZE.ALIENS["width"] || alien.Position.X <= MARGIN.X["min"])
+            {
+                _toLeft = !_toLeft;
+            }
+        }
     }
 
     public static void LoadAliens(int plusGap)
