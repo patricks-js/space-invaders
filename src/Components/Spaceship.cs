@@ -9,8 +9,8 @@ namespace SpaceInvadersRetro.Components;
 
 public class Spaceship : EntityBase, IShootable
 {
-    public Texture2D Texture { get; set; }
-    public Vector2 Position { get; set; }
+    private Texture2D Texture { get; set; }
+    private Vector2 Position { get; set; }
     public override Rectangle Bounds { get; set; }
     private Bullet _bullet;
     private Texture2D _bulletTexture;
@@ -53,7 +53,10 @@ public class Spaceship : EntityBase, IShootable
         spriteBatch.Draw(Texture, Position, Color.White);
     }
 
-    public override void HandleCollision() { }
+    public override void HandleCollision()
+    {
+        SoundManager.PlaySoundEffect("playerexplosion");
+    }
 
     public void CheckCollision()
     {
