@@ -23,6 +23,7 @@ public class GameScreen : IBaseScreen
     public void LoadContent(ContentManager content)
     {
         _background = content.Load<Texture2D>("Images/Background");
+        //Wave.LoadAliensContent(content);
         //_font = content.Load<SpriteFont>("Fonts/GameFont");
         EntityManager.LoadContent(content);
     }
@@ -70,5 +71,10 @@ public class GameScreen : IBaseScreen
             var x = MARGIN.X["max"] + MARGIN.X["min"] + 10 + (SPRITE_SIZE.BARRICADE["width"] + MARGIN.BETWEEN * 5) * i;
             EntityManager.AddEntity(new Barricade(new Vector2(x, y)));
         }
+
+        Wave.LoadAliens();
+        var _wave = Wave.Aliens;
+        _wave.ForEach(a => EntityManager.AddEntity(a));
+
     }
 }
