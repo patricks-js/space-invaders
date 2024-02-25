@@ -4,18 +4,21 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SpaceInvadersRetro.Interfaces;
+using SpaceInvadersRetro.Utils;
 
 namespace SpaceInvadersRetro.Screens;
 public class GameOverScreen : IBaseScreen
 {
+
     private SpaceInvadersGame _game;
     private Texture2D _background, _gameOver, _enter;
     private string _playerName = "";
-    //private SpriteFont _font;  // Load font in LoadContent()
-    //private int _cursorPosition;  // Index of currently selected character
-    private bool _blinkingCursor;  // State of the blinking cursor
+    private SpriteFont _font;
+    private int _cursorPosition;
+    private bool _blinkingCursor;
     private KeyboardState _currentKeyboardState;
     private KeyboardState _previousKeyboardState;
+
 
     public GameOverScreen(SpaceInvadersGame game)
     {
@@ -31,6 +34,7 @@ public class GameOverScreen : IBaseScreen
         _background = content.Load<Texture2D>("Images/Background");
         _gameOver = content.Load<Texture2D>("Images/GameOver");
         _enter = content.Load<Texture2D>("Images/Enter");
+        _font = content.Load<SpriteFont>("Fonts/Press Start 2P");
     }
     public void Update(GameTime gameTime)
     {
@@ -43,22 +47,16 @@ public class GameOverScreen : IBaseScreen
         {
             if (_previousKeyboardState.IsKeyUp(key))
             {
-                if (key == Keys.Enter)
+                if (IsLetter(key))
                 {
-                    _playerName = "";
+                    AddLetterName(key);
                 }
                 else if (key == Keys.Back && _playerName.Length > 0)
                 {
-                    _playerName = _playerName.Remove(_playerName.Length - 1);
-                }
-                else
-                {
-                    _playerName += key.ToString();
+                    RemoveLetterName();
                 }
             }
         }
-
-        Console.WriteLine(_playerName);
 
         _blinkingCursor = !_blinkingCursor;
 
@@ -72,16 +70,41 @@ public class GameOverScreen : IBaseScreen
     public void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(_background, new Vector2(0, 0), Color.White);
-        spriteBatch.Draw(_gameOver, new Vector2(100, 350), Color.White);
+        spriteBatch.Draw(_gameOver, new Vector2(Screen.Width / 2 - _gameOver.Width / 2, 350), Color.White);
         spriteBatch.Draw(_enter, new Vector2(550, 758), Color.White);
 
-        // spriteBatch.DrawString(_font, _playerName, new Vector2(300, 500), Color.White);
-        //
-        // // Draw blinking cursor
-        // if (_blinkingCursor)
-        // {
-        //     spriteBatch.DrawString(_font, "|", new Vector2(300 + _cursorPosition * _font.MeasureString("W").X, 500), Color.White);
-        // }
+        var score = ScoreManager.Score;
+
+        spriteBatch.DrawString(_font, "Total Score", new Vector2((Screen.Width - _font.MeasureString("Total Score").X) / 2, 500), Color.White);
+        spriteBatch.DrawString(_font, score.ToString(), new Vector2((Screen.Width - _font.MeasureString(score.ToString()).X) / 2 , 520), Color.White);
+
+        spriteBatch.DrawString(_font, _playerName, new Vector2((Screen.Width - _font.MeasureString(_playerName).X) / 2, 600), Color.White);
+
+        if (_blinkingCursor)
+        {
+            spriteBatch.DrawString(_font, "|", new Vector2((Screen.Width - _font.MeasureString(_playerName).X) / 2 + (_cursorPosition * _font.MeasureString("W").X),
+                600), Color.White);
+        }
+    }
+
+    private bool IsLetter(Keys key)
+    {
+        return key >= Keys.A && key <= Keys.Z;
+    }
+
+    private void AddLetterName(Keys key)
+    {
+        if (_playerName.Length < 12)
+        {
+            _playerName += key.ToString();
+            _cursorPosition++;
+        }
+    }
+
+    private void RemoveLetterName()
+    {
+        _playerName = _playerName.Remove(_playerName.Length - 1);
+        _cursorPosition--;
     }
 
 }

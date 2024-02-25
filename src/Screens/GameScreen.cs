@@ -13,7 +13,7 @@ public class GameScreen : IBaseScreen
 {
     private readonly SpaceInvadersGame _game;
     private Texture2D _background;
-    // private SpriteFont _font;
+    private SpriteFont _font;
 
     public GameScreen(SpaceInvadersGame game)
     {
@@ -30,8 +30,7 @@ public class GameScreen : IBaseScreen
     public void LoadContent(ContentManager content)
     {
         _background = content.Load<Texture2D>("Images/Background");
-        //Wave.LoadAliensContent(content);
-        //_font = content.Load<SpriteFont>("Fonts/GameFont");
+        _font = content.Load<SpriteFont>("Fonts/Press Start 2P");
         EntityManager.LoadContent(content);
     }
 
@@ -55,14 +54,14 @@ public class GameScreen : IBaseScreen
         var score = ScoreManager.Score;
 
         spriteBatch.Draw(_background, new Vector2(0, 0), Color.White);
-        /*
+
         spriteBatch.DrawString(
             _font,
             $"Score: {score}",
-            new Vector2(MARGIN.X["min"], MARGIN.X["min"] + MARGIN.X["min"]),
+            new Vector2(Margin.X["min"], Margin.X["min"] + Margin.X["min"]),
             Color.White
         );
-        */
+
 
         EntityManager.Draw(spriteBatch);
         BulletManager.Draw(spriteBatch);
