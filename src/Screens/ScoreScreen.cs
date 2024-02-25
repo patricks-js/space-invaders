@@ -12,7 +12,7 @@ public class ScoreScreen : IBaseScreen
     private Texture2D _background,
         _logo;
     private Texture2D _backspace;
-    private SpaceInvadersGame _game;
+    private readonly SpaceInvadersGame _game;
 
     public ScoreScreen(SpaceInvadersGame game)
     {

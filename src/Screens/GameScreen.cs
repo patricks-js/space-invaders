@@ -11,7 +11,7 @@ namespace SpaceInvadersRetro.Screens;
 
 public class GameScreen : IBaseScreen
 {
-    private SpaceInvadersGame _game;
+    private readonly SpaceInvadersGame _game;
     private Texture2D _background;
     // private SpriteFont _font;
 
@@ -39,6 +39,7 @@ public class GameScreen : IBaseScreen
     {
         EntityManager.Update(gameTime);
         BulletManager.Update(gameTime);
+        Wave.Update(gameTime);
 
         if (Wave.Aliens.Count <= 0)
         {
