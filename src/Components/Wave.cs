@@ -51,7 +51,7 @@ public static class Wave
 
             if (Aliens.Any(alien => alien.Bounds.Intersects(entity.Bounds)))
             {
-                game.ChangeScreen(new GameOverScreen());
+                game.ChangeScreen(new GameOverScreen(game));
             }
         });
     }
