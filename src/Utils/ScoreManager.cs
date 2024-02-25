@@ -8,4 +8,9 @@ public class ScoreManager
     {
         Score += points;
     }
+
+    public static void Reset()
+    {
+        Score = 0;
+    }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -62,7 +63,11 @@ public class GameOverScreen : IBaseScreen
 
         if (keyboard.IsKeyDown(Keys.Enter))
         {
+            Thread.Sleep(50);
+            //adicionar método para salvar dados
              _game.ChangeScreen(new StartScreen(_game));
+             _playerName = "";
+             ScoreManager.Reset();
         }
 
     }
