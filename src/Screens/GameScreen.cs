@@ -62,5 +62,13 @@ public class GameScreen : IBaseScreen
 
         // Aliens
         EntityManager.AddEntity(new BonusShip());
+
+        // Barricade
+        for (int i = 0; i < 4; i++)
+        {
+            var y = SCREEN.HEIGHT - MARGIN.Y["top"];
+            var x = MARGIN.X["max"] + MARGIN.X["min"] + 10 + (SPRITE_SIZE.BARRICADE["width"] + MARGIN.BETWEEN * 5) * i;
+            EntityManager.AddEntity(new Barricade(new Vector2(x, y)));
+        }
     }
 }
