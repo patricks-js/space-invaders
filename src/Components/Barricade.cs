@@ -14,15 +14,11 @@ public class Barricade : EntityBase
     private Rectangle _bounds;
     private Texture2D _texture;
     private int _spriteIdx = 4;
-    private int _lifes = 4;
     private int _hits;
-    private bool _isDead;
 
     public Barricade(Vector2 position)
     {
         _position = position;
-
-        _isDead = _lifes == 0;
 
         var w = SpriteSize.Barricade["width"];
         var h = SpriteSize.Barricade["height"];
@@ -53,6 +49,9 @@ public class Barricade : EntityBase
         var h = _sprites[_spriteIdx].Height; // 3, 2, 1, 0
 
         _bounds = new Rectangle(x, y, w, h);
+
+        if (_spriteIdx == 0)
+            EntityManager.RemoveEntity(this);
     }
 
     public override void Draw(SpriteBatch spriteBatch)
@@ -62,12 +61,10 @@ public class Barricade : EntityBase
 
     public override void HandleCollision()
     {
-        if (_isDead) EntityManager.RemoveEntity(this);
-
         _hits++;
 
-        if (_hits <= 3) return;
-        _lifes--;
+        if (_hits <= 1) return;
+
         _hits = 0;
         if(_spriteIdx >= 0) _spriteIdx--;
     }
