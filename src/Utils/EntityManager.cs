@@ -42,6 +42,10 @@ public static class EntityManager
         _entitiesToRemove.ForEach(e =>
         {
             _entities.Remove(e);
+            if (e is AlienBase @base)
+            {
+                Wave.RemoveAlien(@base);
+            }
         });
 
         _entitiesToRemove.Clear();
