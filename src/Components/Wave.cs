@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using SpaceInvadersRetro.Components.Aliens;
 using SpaceInvadersRetro.Utils;
@@ -7,26 +8,21 @@ namespace SpaceInvadersRetro.Components;
 
 public static class Wave
 {
-    private static List<AlienBase> _aliens = new();
-    public static int Gap { get; set; }
-    public static List<AlienBase> Aliens
-    {
-        get => _aliens;
-        private set => _aliens = value;
-    }
+    private static int _gap;
+    public static List<AlienBase> Aliens { get; private set; } = new();
 
     public static void LoadAliensContent(ContentManager content)
     {
-        _aliens.ForEach(a => a.LoadContent(content));
+        Aliens.ForEach(a => a.LoadContent(content));
     }
 
     public static void LoadAliens(int plusGap)
     {
-        Gap += plusGap;
+        _gap += plusGap;
 
         for (int row = 0; row < 5; row++)
         {
-            var y = MARGIN.Y["top"] + Gap + (SPRITE_SIZE.ALIENS["height"] + MARGIN.BETWEEN * 2) * row;
+            var y = MARGIN.Y["top"] + _gap + (SPRITE_SIZE.ALIENS["height"] + MARGIN.BETWEEN * 2) * row;
 
             for (int col = 0; col < 10; col++)
             {
@@ -38,27 +34,29 @@ public static class Wave
 
     public static void RemoveAlien(AlienBase alien)
     {
-        _aliens.Remove(alien);
+        Aliens.Remove(alien);
     }
 
     private static void MakeLines(int row, int x, int y)
     {
+        var position = new Vector2(x, y);
+
         switch (row)
         {
             case 0:
-                _aliens.Add(new Carry(new(x, y)));
+                Aliens.Add(new Carry(position));
                 break;
             case 1:
-                _aliens.Add(new Assassin(new(x, y)));
+                Aliens.Add(new Assassin(position));
                 break;
             case 2:
-                _aliens.Add(new Jungle(new(x, y)));
+                Aliens.Add(new Jungle(position));
                 break;
             case 3:
-                _aliens.Add(new Bruiser(new(x, y)));
+                Aliens.Add(new Bruiser(position));
                 break;
             case 4:
-                _aliens.Add(new Tank(new(x, y)));
+                Aliens.Add(new Tank(position));
                 break;
         }
     }
