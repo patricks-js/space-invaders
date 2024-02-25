@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using SpaceInvadersRetro.Components.Aliens;
+using SpaceInvadersRetro.Screens;
 using SpaceInvadersRetro.Utils;
 
 namespace SpaceInvadersRetro.Components;
@@ -11,6 +13,7 @@ public static class Wave
 {
     private static int _gap;
     private static bool _toLeft = true;
+    private const int Speed = 40;
     public static List<AlienBase> Aliens { get; private set; } = new();
 
     public static void LoadAliensContent(ContentManager content)
@@ -18,12 +21,12 @@ public static class Wave
         Aliens.ForEach(a => a.LoadContent(content));
     }
 
-    public static void Update(GameTime gameTime)
+    public static void Update(GameTime gameTime, SpaceInvadersGame game)
     {
         var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-        var toLeft = Vector2.UnitX * deltaTime * 20;
-        var toRight = -Vector2.UnitX * deltaTime * 20;
-        var toDown = new Vector2(0, 20);
+        var toLeft = Vector2.UnitX * deltaTime * Speed;
+        var toRight = -Vector2.UnitX * deltaTime * Speed;
+        var toDown = new Vector2(0, Speed);
 
         foreach (var alien in Aliens)
         {
@@ -41,6 +44,16 @@ public static class Wave
                 Aliens.ForEach(alienToDown => alienToDown.Position += toDown);
             }
         }
+
+        EntityManager.Entities.ForEach(entity =>
+        {
+            if (entity is AlienBase or Bullet) return;
+
+            if (Aliens.Any(alien => alien.Bounds.Intersects(entity.Bounds)))
+            {
+                game.ChangeScreen(new GameOverScreen());
+            }
+        });
     }
 
     public static void LoadAliens(int plusGap)
