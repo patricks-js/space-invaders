@@ -1,8 +1,10 @@
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SpaceInvadersRetro.Interfaces;
+using SpaceInvadersRetro.Screens;
 using SpaceInvadersRetro.Utils;
 
 namespace SpaceInvadersRetro.Components;
@@ -15,10 +17,12 @@ public class Spaceship : EntityBase, IShootable
     private Bullet _bullet;
     private Texture2D _bulletTexture;
     private const int Speed = 5;
+    private SpaceInvadersGame _game;
 
-    public Spaceship(Vector2 initialPosition)
+    public Spaceship(Vector2 initialPosition, SpaceInvadersGame game)
     {
         Position = initialPosition;
+        _game = game;
     }
 
     public override void LoadContent(ContentManager content)
@@ -44,7 +48,9 @@ public class Spaceship : EntityBase, IShootable
 
         Bounds = new((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
 
-        CheckCollision();
+        CheckBulletCollision();
+        CheckSpaceshipHealth();
+        CheckScoreToIncreaseHealth();
         Movement();
     }
 
@@ -56,9 +62,10 @@ public class Spaceship : EntityBase, IShootable
     public override void HandleCollision()
     {
         SoundManager.PlaySoundEffect("playerexplosion");
+        SpaceshipHealthManager.DecreaseHealth();
     }
 
-    public void CheckCollision()
+    public void CheckBulletCollision()
     {
         foreach (var e in EntityManager.Entities)
         {
@@ -68,6 +75,24 @@ public class Spaceship : EntityBase, IShootable
                 BulletManager.RemoveBullet(_bullet);
                 _bullet = null;
             }
+        }
+    }
+
+    private void CheckSpaceshipHealth()
+    {
+        if (SpaceshipHealthManager.Health <= 0)
+        {
+            EntityManager.RemoveEntity(this);
+            Thread.Sleep(500);
+            _game.ChangeScreen(new GameOverScreen(_game));
+        }
+    }
+
+    private void CheckScoreToIncreaseHealth()
+    {
+        if (ScoreManager.Score % 1000 == 0)
+        {
+            SpaceshipHealthManager.IncreaseHealth();
         }
     }
 
