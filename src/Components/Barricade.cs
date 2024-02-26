@@ -23,10 +23,10 @@ public class Barricade : EntityBase
         var w = SpriteSize.Barricade["width"];
         var h = SpriteSize.Barricade["height"];
 
-        _sprites[4] = new Rectangle(0, h - 115, w, 39);
-        _sprites[3] = new Rectangle(0, h - 76, w, 38);
-        _sprites[2] = new Rectangle(0, h - 38, w, 25);
-        _sprites[1] = new Rectangle(0, h - 13, w, 13);
+        _sprites[4] = new Rectangle(0, 0, w, h);
+        _sprites[3] = new Rectangle(0, h, w, h);
+        _sprites[2] = new Rectangle(0, h * 2, w, h);
+        _sprites[1] = new Rectangle(0, h * 3, w, h);
         _sprites[0] = new Rectangle();
     }
 
