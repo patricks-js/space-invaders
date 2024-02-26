@@ -13,7 +13,7 @@ public static class Wave
 {
     private static int _gap;
     private static bool _toLeft = true;
-    private const int Speed = 40;
+    private const int Speed = 20;
     public static List<AlienBase> Aliens { get; private set; } = new();
 
     public static void LoadAliensContent(ContentManager content)
