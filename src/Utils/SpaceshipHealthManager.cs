@@ -1,20 +1,26 @@
-namespace SpaceInvadersRetro.Components;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace SpaceInvadersRetro.Utils;
 
 public static class SpaceshipHealthManager
 {
-    private static int _health = 3;
-    public static int Health { get; set; }
+    // private Texture2D _texture;
+
+    public static int Health { get; set; } = 3;
 
     public static void DecreaseHealth()
     {
-        _health--;
+        Health--;
     }
 
     public static void IncreaseHealth()
     {
-        if (_health <= 6)
+        if (Health <= 6)
         {
-            _health++;
+            Health++;
         }
     }
+
+    public static void Reset() => Health = 3;
 }
