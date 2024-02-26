@@ -8,10 +8,10 @@ using SpaceInvadersRetro.Interfaces;
 using SpaceInvadersRetro.Utils;
 
 namespace SpaceInvadersRetro.Screens;
+
 public class GameOverScreen : IBaseScreen
 {
-
-    private SpaceInvadersGame _game;
+    private readonly SpaceInvadersGame _game;
     private Texture2D _background, _gameOver, _enter;
     private string _playerName = "";
     private SpriteFont _font;
@@ -20,11 +20,11 @@ public class GameOverScreen : IBaseScreen
     private KeyboardState _currentKeyboardState;
     private KeyboardState _previousKeyboardState;
 
-
     public GameOverScreen(SpaceInvadersGame game)
     {
         _game = game;
     }
+
     public void Initialize()
     {
         //throw new System.NotImplementedException();
@@ -37,6 +37,7 @@ public class GameOverScreen : IBaseScreen
         _enter = content.Load<Texture2D>("Images/Enter");
         _font = content.Load<SpriteFont>("Fonts/Press Start 2P");
     }
+
     public void Update(GameTime gameTime)
     {
         var keyboard = Keyboard.GetState();
@@ -65,11 +66,10 @@ public class GameOverScreen : IBaseScreen
         {
             Thread.Sleep(50);
             //adicionar método para salvar dados
-             _game.ChangeScreen(new StartScreen(_game));
-             _playerName = "";
-             ScoreManager.Reset();
+            _game.ChangeScreen(new StartScreen(_game));
+            _playerName = "";
+            ScoreManager.Reset();
         }
-
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -80,14 +80,19 @@ public class GameOverScreen : IBaseScreen
 
         var score = ScoreManager.Score;
 
-        spriteBatch.DrawString(_font, "Total Score", new Vector2((Screen.Width - _font.MeasureString("Total Score").X) / 2, 500), Color.White);
-        spriteBatch.DrawString(_font, score.ToString(), new Vector2((Screen.Width - _font.MeasureString(score.ToString()).X) / 2 , 520), Color.White);
+        spriteBatch.DrawString(_font, "Total Score",
+            new Vector2((Screen.Width - _font.MeasureString("Total Score").X) / 2, 500), Color.White);
+        spriteBatch.DrawString(_font, score.ToString(),
+            new Vector2((Screen.Width - _font.MeasureString(score.ToString()).X) / 2, 520), Color.White);
 
-        spriteBatch.DrawString(_font, _playerName, new Vector2((Screen.Width - _font.MeasureString(_playerName).X) / 2, 600), Color.White);
+        spriteBatch.DrawString(_font, _playerName,
+            new Vector2((Screen.Width - _font.MeasureString(_playerName).X) / 2, 600), Color.White);
 
         if (_blinkingCursor)
         {
-            spriteBatch.DrawString(_font, "|", new Vector2((Screen.Width - _font.MeasureString(_playerName).X) / 2 + (_cursorPosition * _font.MeasureString("W").X),
+            spriteBatch.DrawString(_font, "|", new Vector2(
+                (Screen.Width - _font.MeasureString(_playerName).X) / 2 +
+                (_cursorPosition * _font.MeasureString("W").X),
                 600), Color.White);
         }
     }
@@ -111,5 +116,4 @@ public class GameOverScreen : IBaseScreen
         _playerName = _playerName.Remove(_playerName.Length - 1);
         _cursorPosition--;
     }
-
 }
