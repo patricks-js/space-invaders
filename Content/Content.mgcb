@@ -13,6 +13,16 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Fonts/Press Start 2P.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Press Start 2P.spritefont
+
+#begin Fonts/Press Start 2P.ttf
+/copy:Fonts/Press Start 2P.ttf
+
 #begin Images/Background.png
 /importer:TextureImporter
 /processor:TextureProcessor
