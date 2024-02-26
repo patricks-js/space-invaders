@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -17,7 +18,7 @@ public class Spaceship : EntityBase, IShootable
     private Bullet _bullet;
     private Texture2D _bulletTexture;
     private const int Speed = 5;
-    private SpaceInvadersGame _game;
+    private readonly SpaceInvadersGame _game;
 
     public Spaceship(Vector2 initialPosition, SpaceInvadersGame game)
     {
@@ -90,7 +91,7 @@ public class Spaceship : EntityBase, IShootable
 
     private void CheckScoreToIncreaseHealth()
     {
-        if (ScoreManager.Score % 1000 == 0)
+        if (ScoreManager.Score % 1000 == 0 && ScoreManager.Score != 0)
         {
             SpaceshipHealthManager.IncreaseHealth();
         }
@@ -120,12 +121,11 @@ public class Spaceship : EntityBase, IShootable
             }
         }
 
-        if (keyboard.IsKeyDown(Keys.D) || keyboard.IsKeyDown(Keys.Right))
+        if (!keyboard.IsKeyDown(Keys.D) && !keyboard.IsKeyDown(Keys.Right)) return;
+
+        if (Position.X < Screen.Width - Margin.X["max"] - Texture.Width)
         {
-            if (Position.X < Screen.Width - Margin.X["max"] - Texture.Width)
-            {
-                Position = new(Position.X + Speed, Position.Y);
-            }
+            Position = new Vector2(Position.X + Speed, Position.Y);
         }
     }
 }
