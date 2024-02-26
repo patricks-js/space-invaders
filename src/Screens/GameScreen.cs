@@ -26,13 +26,18 @@ public class GameScreen : IBaseScreen
         EntityManager.Entities.Clear();
         BulletManager.Bullets.Clear();
         ScoreManager.Reset();
-        SpaceshipHealthManager.Health = 3;
+        SpaceshipHealthManager.Reset();
     }
 
     public void Initialize()
     {
         LoadEntities();
 
+        var x = Screen.Width - Margin.X["min"] - SpriteSize.Health["width"];
+        var y = Margin.X["min"] + Margin.X["min"] - SpriteSize.Health["height"] / 2;
+        var healthPosition = new Vector2(x, y);
+
+        SpaceshipHealthManager.Initialize(healthPosition);
         SoundManager.StopSong();
     }
 
@@ -40,6 +45,7 @@ public class GameScreen : IBaseScreen
     {
         _background = content.Load<Texture2D>("Images/Background");
         _font = content.Load<SpriteFont>("Fonts/Press Start 2P");
+        SpaceshipHealthManager.LoadContent(content);
         EntityManager.LoadContent(content);
     }
 
@@ -71,7 +77,7 @@ public class GameScreen : IBaseScreen
             Color.White
         );
 
-
+        SpaceshipHealthManager.Draw(spriteBatch);
         EntityManager.Draw(spriteBatch);
         BulletManager.Draw(spriteBatch);
     }
