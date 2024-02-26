@@ -20,6 +20,15 @@ public class GameScreen : IBaseScreen
         _game = game;
     }
 
+    ~GameScreen()
+    {
+        Wave.Aliens.Clear();
+        EntityManager.Entities.Clear();
+        BulletManager.Bullets.Clear();
+        ScoreManager.Reset();
+        SpaceshipHealthManager.Health = 3;
+    }
+
     public void Initialize()
     {
         LoadEntities();
