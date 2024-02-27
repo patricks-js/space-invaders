@@ -64,8 +64,15 @@ public class GameOverScreen : IBaseScreen
 
         if (keyboard.IsKeyDown(Keys.Enter))
         {
-            Thread.Sleep(50);
             //adicionar método para salvar dados
+            var player = new PlayerData();
+            player.Name = _playerName;
+            player.Score = ScoreManager.Score;
+            ScoreManager.SaveScoreList(player);
+
+            Thread.Sleep(50);
+
+            //resetar as variáveis
             _game.ChangeScreen(new StartScreen(_game));
             _playerName = "";
             ScoreManager.Reset();
