@@ -103,7 +103,7 @@ public class GameScreen : IBaseScreen
     {
         for (int i = 0; i < 4; i++)
         {
-            var y = Screen.Height - Margin.Y["top"];
+            var y = Screen.Height - (Margin.Y["top"] + 40);
             var x = Margin.X["max"] + Margin.X["min"] + 6 + (SpriteSize.Barricade["width"] + Margin.Between * 5) * i;
             EntityManager.AddEntity(new Barricade(new Vector2(x, y)));
         }
