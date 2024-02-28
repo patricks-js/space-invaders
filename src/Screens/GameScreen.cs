@@ -85,25 +85,35 @@ public class GameScreen : IBaseScreen
     private void LoadEntities()
     {
         // Spaceship
-        var spaceshipPosition = new Vector2(Screen.Width / 2, Screen.Height - Margin.Y["bottom"]);
+        var spaceshipPosition = new Vector2(
+            (float)Screen.Width / 2 - (float)SpriteSize.Spaceship["width"] / 2,
+            Screen.Height - Margin.Y["bottom"]
+        );
+
         EntityManager.AddEntity(new Spaceship(spaceshipPosition, _game));
 
         // Bullet
         BulletManager.Bullets.ForEach(EntityManager.AddEntity);
 
-        // Aliens
-        EntityManager.AddEntity(new BonusShip());
+        LoadBarricades();
+        LoadAliens();
+    }
 
-        // Barricade
+    private void LoadBarricades()
+    {
         for (int i = 0; i < 4; i++)
         {
             var y = Screen.Height - Margin.Y["top"];
-            var x = Margin.X["max"] + Margin.X["min"] + 10 + (SpriteSize.Barricade["width"] + Margin.Between * 5) * i;
+            var x = Margin.X["max"] + Margin.X["min"] + 6 + (SpriteSize.Barricade["width"] + Margin.Between * 5) * i;
             EntityManager.AddEntity(new Barricade(new Vector2(x, y)));
         }
+    }
+
+    private void LoadAliens()
+    {
+        EntityManager.AddEntity(new BonusShip());
 
         Wave.LoadAliens(0);
-        var wave = Wave.Aliens;
-        wave.ForEach(EntityManager.AddEntity);
+        Wave.Aliens.ForEach(EntityManager.AddEntity);
     }
 }
