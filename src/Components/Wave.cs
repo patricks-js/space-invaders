@@ -13,7 +13,10 @@ public static class Wave
 {
     private static int _gap;
     private static bool _toLeft = true;
-    private const int Speed = 20;
+    private const float BaseSpeed = 20f;
+    private const float SpeedIncreaseRate = 0.5f;
+    private static float _currentSpeed = BaseSpeed;
+
     public static List<AlienBase> Aliens { get; private set; } = new();
 
     public static void LoadAliensContent(ContentManager content)
@@ -24,9 +27,9 @@ public static class Wave
     public static void Update(GameTime gameTime, SpaceInvadersGame game)
     {
         var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-        var toLeft = Vector2.UnitX * deltaTime * Speed;
-        var toRight = -Vector2.UnitX * deltaTime * Speed;
-        var toDown = new Vector2(0, Speed);
+        var toLeft = Vector2.UnitX * deltaTime * _currentSpeed;
+        var toRight = -Vector2.UnitX * deltaTime * _currentSpeed;
+        var toDown = new Vector2(0, 20);
 
         foreach (var alien in Aliens)
         {
@@ -45,6 +48,16 @@ public static class Wave
             }
         }
 
+        if (_currentSpeed <= 60f)
+        {
+            _currentSpeed += SpeedIncreaseRate * deltaTime;
+        }
+
+        HandleAlienCollision(game);
+    }
+
+    private static void HandleAlienCollision(SpaceInvadersGame game)
+    {
         EntityManager.Entities.ForEach(entity =>
         {
             if (entity is AlienBase or Bullet) return;
