@@ -10,50 +10,42 @@ namespace SpaceInvadersRetro.Utils;
 
 public static class EntityManager
 {
-    private static readonly List<EntityBase> _entities = new();
-    private static readonly List<EntityBase> _entitiesToRemove = new();
-    public static List<EntityBase> Entities => _entities;
+    private static readonly List<EntityBase> EntitiesToRemove = new();
+    public static List<EntityBase> Entities { get; } = new();
 
     public static void AddEntity(EntityBase entity)
     {
-        _entities.Add(entity);
-    }
-
-    public static EntityBase Search(int idx)
-    {
-        return _entities[idx];
+        Entities.Add(entity);
     }
 
     public static void RemoveEntity(EntityBase entity)
     {
-        _entitiesToRemove.Add(entity);
+        EntitiesToRemove.Add(entity);
     }
 
     public static void LoadContent(ContentManager content)
     {
-        _entities.ForEach(e => e?.LoadContent(content));
-
+        Entities.ForEach(e => e?.LoadContent(content));
     }
 
     public static void Update(GameTime gameTime)
     {
-        _entities.ForEach(e => e?.Update(gameTime));
+        Entities.ForEach(e => e?.Update(gameTime));
 
-        _entitiesToRemove.ForEach(e =>
+        EntitiesToRemove.ForEach(e =>
         {
-            _entities.Remove(e);
+            Entities.Remove(e);
             if (e is AlienBase @base)
             {
                 Wave.RemoveAlien(@base);
             }
         });
 
-        _entitiesToRemove.Clear();
+        EntitiesToRemove.Clear();
     }
 
     public static void Draw(SpriteBatch spriteBatch)
     {
-
-        _entities.ForEach(e => e?.Draw(spriteBatch));
+        Entities.ForEach(e => e?.Draw(spriteBatch));
     }
 }

@@ -7,8 +7,7 @@ namespace SpaceInvadersRetro.Utils;
 
 public static class BulletManager
 {
-    private static readonly List<Bullet> _bullets = new();
-    public static List<Bullet> Bullets => _bullets;
+    public static List<Bullet> Bullets { get; } = new();
 
     public static Bullet CreateBullet(
         Vector2 position,
@@ -18,15 +17,15 @@ public static class BulletManager
     )
     {
         var bullet = new Bullet(position, texture, direction, speed);
-        _bullets.Add(bullet);
+        Bullets.Add(bullet);
         return bullet;
     }
 
-    public static void RemoveBullet(Bullet bullet) => _bullets.Remove(bullet);
+    public static void RemoveBullet(Bullet bullet) => Bullets.Remove(bullet);
 
     public static void Update(GameTime gameTime) =>
-        _bullets.ForEach(bullet => bullet?.Update(gameTime));
+        Bullets.ForEach(bullet => bullet?.Update(gameTime));
 
     public static void Draw(SpriteBatch spriteBatch) =>
-        _bullets.ForEach(bullet => bullet?.Draw(spriteBatch));
+        Bullets.ForEach(bullet => bullet?.Draw(spriteBatch));
 }

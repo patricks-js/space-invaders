@@ -19,11 +19,15 @@ public readonly struct SpriteSize
 {
     public static readonly Dictionary<string, int> Aliens =
         new() { { "width", 45 }, { "height", 36 } };
+
     public static readonly Dictionary<string, int> Barricade =
         new() { { "width", 80 }, { "height", 39 } };
+
     public static readonly Dictionary<string, int> Health =
         new() { { "width", 86 }, { "height", 43 } };
 
+    public static readonly Dictionary<string, int> Spaceship =
+        new() { { "width", 36 }, { "height", 36 } };
 }
 
 public readonly struct SpriteFrames

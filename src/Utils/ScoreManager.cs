@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace SpaceInvadersRetro.Utils;
 
@@ -16,35 +16,38 @@ public static class ScoreManager
 
     public static void SaveScoreList(PlayerData player)
     {
-            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "HighScores.json");
+        var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+            "HighScores.json");
 
-            List<PlayerData> playerDataList;
-            if (File.Exists(filePath))
-            {
-                string json = File.ReadAllText(filePath);
-                playerDataList = JsonConvert.DeserializeObject<List<PlayerData>>(json);
-            }
-            else
-            {
-                playerDataList = new List<PlayerData>();
-            }
+        List<PlayerData> playerDataList;
 
-            playerDataList.Add(player);
-            playerDataList = playerDataList.OrderByDescending(p => p.Score).ToList();
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            playerDataList = JsonConvert.DeserializeObject<List<PlayerData>>(json);
+        }
+        else
+        {
+            playerDataList = new List<PlayerData>();
+        }
 
-            if (playerDataList.Count > 5)
-            {
-                playerDataList.RemoveAt(playerDataList.Count - 1);
-            }
+        playerDataList.Add(player);
+        playerDataList = playerDataList.OrderByDescending(p => p.Score).ToList();
 
-            var updatedJson = JsonConvert.SerializeObject(playerDataList, Formatting.Indented);
-            File.WriteAllText(filePath, updatedJson);
+        if (playerDataList.Count > 5)
+        {
+            playerDataList.RemoveAt(playerDataList.Count - 1);
+        }
 
+        var updatedJson = JsonConvert.SerializeObject(playerDataList, Formatting.Indented);
+        File.WriteAllText(filePath, updatedJson);
     }
+
     public static List<PlayerData> LoadScoreList()
     {
         List<PlayerData> playerDataList = new List<PlayerData>();
-        var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "HighScores.json");
+        var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+            "HighScores.json");
 
         if (File.Exists(filePath))
         {
