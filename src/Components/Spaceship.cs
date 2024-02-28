@@ -12,17 +12,22 @@ namespace SpaceInvadersRetro.Components;
 
 public class Spaceship : EntityBase, IShootable
 {
+    private readonly SpaceInvadersGame _game;
     private Texture2D Texture { get; set; }
     private Vector2 Position { get; set; }
     public override Rectangle Bounds { get; set; }
+
+    private int _pointsRange = 1000;
+
     private Bullet _bullet;
     private Texture2D _bulletTexture;
     private const int Speed = 5;
-    private readonly SpaceInvadersGame _game;
+    private readonly Vector2 _initialPosition;
 
     public Spaceship(Vector2 initialPosition, SpaceInvadersGame game)
     {
         Position = initialPosition;
+        _initialPosition = initialPosition;
         _game = game;
     }
 
@@ -47,7 +52,8 @@ public class Spaceship : EntityBase, IShootable
             _bullet = null;
         }
 
-        Bounds = new((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
+        Bounds = new((int)Position.X - Texture.Width / 2, (int)Position.Y - Texture.Height / 2, Texture.Width,
+            Texture.Height);
 
         CheckBulletCollision();
         CheckSpaceshipHealth();
@@ -64,6 +70,9 @@ public class Spaceship : EntityBase, IShootable
     {
         SoundManager.PlaySoundEffect("playerexplosion");
         SpaceshipHealthManager.DecreaseHealth();
+        Thread.Sleep(400);
+        BulletManager.Bullets.Clear();
+        Position = _initialPosition;
     }
 
     public void CheckBulletCollision()
@@ -91,10 +100,10 @@ public class Spaceship : EntityBase, IShootable
 
     private void CheckScoreToIncreaseHealth()
     {
-        if (ScoreManager.Score % 1000 == 0 && ScoreManager.Score != 0)
-        {
-            SpaceshipHealthManager.IncreaseHealth();
-        }
+        if (ScoreManager.Score <= _pointsRange || ScoreManager.Score == 0) return;
+
+        SpaceshipHealthManager.IncreaseHealth();
+        _pointsRange += 1000;
     }
 
     public void Shoot()
@@ -102,7 +111,7 @@ public class Spaceship : EntityBase, IShootable
         SoundManager.PlaySoundEffect("shoot");
 
         var bulletPos = new Vector2(
-            Position.X + (Texture.Width - _bulletTexture.Width) / 2,
+            Position.X + (float)(Texture.Width - _bulletTexture.Width) / 2,
             Position.Y
         );
 
