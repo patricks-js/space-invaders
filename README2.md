@@ -6,16 +6,18 @@ This game is made with C# programming language and MonoGame framework for game d
 
 ### Screens
 
-- [ ] Start
+- [x] Start
 - [x] Game
-- [ ] Score
+- [x] Score
+- [x] Game over
+- [x] Controls
 
 ### Components
 
 - [x] Entity interface
 - [x] Spaceship
-- [ ] Enemies spaceships
+- [x] Enemies spaceships
 - [x] Bullet
 - [x] Bonus spaceship
-- [ ] Score
-- [ ] Hearts
+- [x] Score
+- [x] Hearts

@@ -66,6 +66,6 @@ public class Barricade : EntityBase
         if (_hits <= 3) return;
 
         _hits = 0;
-        if(_spriteIdx >= 0) _spriteIdx--;
+        if (_spriteIdx >= 0) _spriteIdx--;
     }
 }

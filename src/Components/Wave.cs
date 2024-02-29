@@ -72,6 +72,7 @@ public static class Wave
     public static void LoadAliens(int plusGap)
     {
         _gap += plusGap;
+        _currentSpeed = BaseSpeed;
 
         for (int row = 0; row < 5; row++)
         {

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using SpaceInvadersRetro.Interfaces;
 using SpaceInvadersRetro.Utils;
 
@@ -10,19 +11,18 @@ namespace SpaceInvadersRetro.Screens;
 
 public class StartScreen : IBaseScreen
 {
-    private SpaceInvadersGame _game;
+    private readonly SpaceInvadersGame _game;
     private Texture2D _background;
     private Texture2D _logo;
     private Texture2D _select, _enter;
 
-    private Texture2D _selectStart,
-        _selectScore,
-        _selectControls;
-    private bool IsKeyPress = false;
+    private Song _bgMusic;
 
-    private Texture2D[] Menu = new Texture2D[3];
+    private bool _isKeyPress;
 
-    private int _choice = 0;
+    private readonly Texture2D[] _menu = new Texture2D[3];
+
+    private int _choice;
 
     public StartScreen(SpaceInvadersGame game)
     {
@@ -31,8 +31,6 @@ public class StartScreen : IBaseScreen
 
     public void Initialize()
     {
-        SoundManager.LoadSong("spaceinvadersmusic");
-        SoundManager.PlaySong(.9f, true);
     }
 
     public void LoadContent(ContentManager content)
@@ -41,10 +39,15 @@ public class StartScreen : IBaseScreen
         _logo = content.Load<Texture2D>("Images/Logo");
         _select = content.Load<Texture2D>("Images/Select");
         _enter = content.Load<Texture2D>("Images/Enter");
+        _bgMusic = content.Load<Song>("Sounds/spaceinvadersmusic");
 
-        Menu[0] = _selectStart = content.Load<Texture2D>("Images/SelectStart");
-        Menu[1] = _selectScore = content.Load<Texture2D>("Images/SelectScore");
-        Menu[2] = _selectControls = content.Load<Texture2D>("Images/SelectControls");
+        _menu[0] = content.Load<Texture2D>("Images/SelectStart");
+        _menu[1] = content.Load<Texture2D>("Images/SelectScore");
+        _menu[2] = content.Load<Texture2D>("Images/SelectControls");
+
+        MediaPlayer.IsRepeating = true;
+        MediaPlayer.Volume -= 0.8f;
+        MediaPlayer.Play(_bgMusic);
     }
 
     public void Update(GameTime gameTime)
@@ -67,9 +70,9 @@ public class StartScreen : IBaseScreen
             }
         }
 
-        if (keyboard.IsKeyDown(Keys.S) && !IsKeyPress)
+        if (keyboard.IsKeyDown(Keys.S) && !_isKeyPress)
         {
-            IsKeyPress = true;
+            _isKeyPress = true;
             Thread.Sleep(50);
             _choice++;
             if (_choice > 2)
@@ -77,9 +80,9 @@ public class StartScreen : IBaseScreen
                 _choice = 0;
             }
         }
-        if (keyboard.IsKeyDown(Keys.W) && !IsKeyPress)
+        if (keyboard.IsKeyDown(Keys.W) && !_isKeyPress)
         {
-            IsKeyPress = true;
+            _isKeyPress = true;
             Thread.Sleep(50);
             _choice--;
             if (_choice < 0)
@@ -89,11 +92,11 @@ public class StartScreen : IBaseScreen
         }
         if (keyboard.IsKeyUp(Keys.S))
         {
-            IsKeyPress = false;
+            _isKeyPress = false;
         }
         if (keyboard.IsKeyUp(Keys.W))
         {
-            IsKeyPress = false;
+            _isKeyPress = false;
         }
     }
 
@@ -102,11 +105,11 @@ public class StartScreen : IBaseScreen
         spriteBatch.Draw(_background, new Vector2(0, 0), Color.White);
         spriteBatch.Draw(
             _logo,
-            new Vector2(Screen.Width / 2 - _logo.Width / 2, Margin.Y["bottom"]),
+            new Vector2((float)Screen.Width / 2 - (float)_logo.Width / 2, Margin.Y["bottom"]),
             Color.White
         );
 
-        spriteBatch.Draw(Menu[_choice], new Vector2(200, 350), Color.White);
+        spriteBatch.Draw(_menu[_choice], new Vector2(200, 350), Color.White);
 
         spriteBatch.Draw(_select, new Vector2(50, 720), Color.White);
         spriteBatch.Draw(_enter, new Vector2(550, 758), Color.White);

@@ -25,8 +25,6 @@ public class ScoreScreen : IBaseScreen
 
     public void Initialize()
     {
-        SoundManager.LoadSong("spaceinvadersmusic");
-        SoundManager.PlaySong(.9f, true);
         _playerScores = ScoreManager.LoadScoreList();
     }
 

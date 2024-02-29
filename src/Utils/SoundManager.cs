@@ -12,11 +12,12 @@ public abstract class SoundManager
     public static void CreateInstance(ContentManager content)
     {
         _content ??= content;
+        LoadSong();
     }
 
-    public static void LoadSong(string songName)
+    private static void LoadSong()
     {
-        _backgroundMusic = _content.Load<Song>($"Sounds/{songName}");
+        _backgroundMusic = _content.Load<Song>("Sounds/spaceinvadersmusic");
     }
 
     public static void PlaySong(float volume, bool repeat)

@@ -23,8 +23,6 @@ public class ControlScreen : IBaseScreen
 
     public void Initialize()
     {
-        SoundManager.LoadSong("spaceinvadersmusic");
-        SoundManager.PlaySong(.9f, true);
     }
 
     public void LoadContent(ContentManager content)

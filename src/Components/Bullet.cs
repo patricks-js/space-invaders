@@ -8,11 +8,11 @@ namespace SpaceInvadersRetro.Components;
 
 public class Bullet : EntityBase
 {
-    private Vector2 _direction;
-    public Texture2D Texture { get; set; }
-    public Vector2 _position;
+    private readonly Vector2 _direction;
+    private Texture2D Texture { get; set; }
+    private Vector2 _position;
     public Rectangle _bounds;
-    public float Speed { get; set; } = 500f;
+    private float Speed { get; set; }
     public override Rectangle Bounds
     {
         get => _bounds;
@@ -24,7 +24,7 @@ public class Bullet : EntityBase
         Texture = texture;
         _position = initialPosition;
         _direction = direction;
-        _bounds = new((int)_position.X, (int)_position.Y, Texture.Width, Texture.Height);
+        _bounds = new Rectangle((int)_position.X - 3 / 2, (int)_position.Y - 9, Texture.Width, Texture.Height);
         Speed = speed;
     }
 
